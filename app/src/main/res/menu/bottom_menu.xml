@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/moviesFrag"
+        android:icon="@drawable/movie_icon"
+        android:title="Movies" />
+    <item
+        android:id="@+id/WishlistFrag"
+        android:icon="@drawable/fas_icon"
+        android:title="Wishlist" />
+    <item
+        android:id="@+id/searchFrag"
+        android:icon="@drawable/search_icon"
+        android:title="Search" />
+</menu>

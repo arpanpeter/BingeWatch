@@ -2,8 +2,14 @@
     <!-- Base application theme. -->
     <style name="Base.Theme.BingeWatch" parent="Theme.Material3.DayNight.NoActionBar">
         <!-- Customize your light theme here. -->
-        <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
+         <item name="colorPrimary">@color/purple</item>
+         <item name="colorPrimaryVariant">@color/purple</item>
+         <item name="android:statusBarColor">@color/purple</item>
     </style>
 
     <style name="Theme.BingeWatch" parent="Base.Theme.BingeWatch" />
+
+    <style name="App.custom.indicator" parent="Widget.Material3.BottomNavigationView.ActiveIndicator">
+        <item name="android:color">@color/yellow</item>
+    </style>
 </resources>
