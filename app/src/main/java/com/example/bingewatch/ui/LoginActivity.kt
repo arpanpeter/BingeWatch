@@ -1,4 +1,4 @@
-package com.example.bingewatch
+package com.example.bingewatch.ui
 
 import android.content.Intent
 import android.os.Bundle
@@ -12,7 +12,7 @@ private lateinit var binding: ActivityLoginBinding
         binding=ActivityLoginBinding.inflate(layoutInflater)
         setContentView(binding.root)
         binding.buttonLogin.setOnClickListener {
-            val intent=Intent(this,HomeActivity::class.java)
+            val intent=Intent(this, HomeActivity::class.java)
             startActivity(intent)
         }
 
