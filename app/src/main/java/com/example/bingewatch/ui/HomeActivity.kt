@@ -1,5 +1,6 @@
 package com.example.bingewatch.ui
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.Navigation
@@ -22,4 +23,10 @@ class HomeActivity : AppCompatActivity() {
         NavigationUI.setupWithNavController(bottomNavigation, navController)
         RetrofitInstance.getPopularMovies()
     }
+    @SuppressLint("MissingSuperCall")
+    override fun onBackPressed() {
+        // Close the app when back button is pressed in HomeActivity
+        finishAffinity()
+    }
+
 }

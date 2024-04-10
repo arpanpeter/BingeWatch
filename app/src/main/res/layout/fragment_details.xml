@@ -15,7 +15,7 @@
         android:id="@+id/fab"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:src="@drawable/fas_icon"
+        android:src="@drawable/fav_icon"
         app:fabSize="normal"
         android:layout_marginBottom="32dp"
         android:layout_marginEnd="32dp"

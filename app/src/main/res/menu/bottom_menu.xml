@@ -6,7 +6,7 @@
         android:title="Movies" />
     <item
         android:id="@+id/favsFragment"
-        android:icon="@drawable/fas_icon"
+        android:icon="@drawable/fav_icon"
         android:title="Wishlist" />
     <item
         android:id="@+id/searchFragment"
