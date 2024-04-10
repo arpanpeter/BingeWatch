@@ -33,7 +33,7 @@ class DetailsActivity : AppCompatActivity() {
         backdrop = findViewById(R.id.movie_backdrop)
         poster = findViewById(R.id.movie_poster)
         title = findViewById(R.id.movie_title)
-        rating = findViewById(R.id.movie_rating)
+        rating = findViewById<RatingBar>(R.id.movie_rating)
         releaseDate = findViewById(R.id.movie_release_date)
         overview = findViewById(R.id.movie_overview)
         val extras = intent.extras
@@ -61,7 +61,7 @@ class DetailsActivity : AppCompatActivity() {
         title.text = extras.getString("MOVIE_TITLE", "")
         rating.rating = extras.getFloat("MOVIE_RATING", 0f)
         releaseDate.text = extras.getString("MOVIE_RELEASE_DATE", "")
-        overview.text=extras.getString("MOVIE_OVERVIEW","")
+        overview.text=extras.getString("MOVIE_DESC","")
 
     }
 }

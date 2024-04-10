@@ -25,7 +25,7 @@ class SearchFragment : Fragment() {
 
         recyclerView = view.findViewById(R.id.recyclerSearch)
         recyclerView.layoutManager = LinearLayoutManager(requireContext())
-        searchAdapter = SearchAdapter(emptyList())
+        searchAdapter = SearchAdapter(emptyList(),requireContext())
         recyclerView.adapter = searchAdapter
 
         // Initialize SearchViewModel

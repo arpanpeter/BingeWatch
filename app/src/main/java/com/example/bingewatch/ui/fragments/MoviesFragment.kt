@@ -14,12 +14,6 @@ import com.example.bingewatch.adapters.MovieAdapter
 import com.example.bingewatch.ViewModel.MoviesViewModel
 import com.example.bingewatch.models.Movie
 import com.example.bingewatch.ui.DetailsActivity
-//import com.example.bingewatch.ui.MOVIE_BACKDROP
-//import com.example.bingewatch.ui.MOVIE_OVERVIEW
-//import com.example.bingewatch.ui.MOVIE_POSTER
-//import com.example.bingewatch.ui.MOVIE_RATING
-//import com.example.bingewatch.ui.MOVIE_RELEASE_DATE
-//import com.example.bingewatch.ui.MOVIE_TITLE
 import com.example.newsprojectpractice.R
 
 class MoviesFragment : Fragment() {
