@@ -4,6 +4,7 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.Navigation
 import androidx.navigation.ui.NavigationUI
+import com.example.bingewatch.api.RetrofitInstance
 import com.example.newsprojectpractice.R
 
 import com.example.newsprojectpractice.databinding.ActivityHomeBinding
@@ -15,8 +16,10 @@ class HomeActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityHomeBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        //Connecting Fragments with the Bottom NavBar
         val navController = Navigation.findNavController(this, R.id.moviesNavHostFragment)
         val bottomNavigation = binding.bottomNavigationView
         NavigationUI.setupWithNavController(bottomNavigation, navController)
+        RetrofitInstance.getPopularMovies()
     }
 }
