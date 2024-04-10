@@ -11,11 +11,11 @@
         android:id="@+id/flFragment"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        app:layout_constraintBottom_toTopOf="@+id/bottomNavigationView"
+        app:layout_constraintBottom_toTopOf="@id/bottomNavigationView"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
+
         <fragment
             android:id="@+id/moviesNavHostFragment"
             android:name="androidx.navigation.fragment.NavHostFragment"
@@ -24,17 +24,18 @@
             app:defaultNavHost="true"
             app:navGraph="@navigation/movies_nav_graph" />
     </FrameLayout>
+
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/bottomNavigationView"
         android:layout_width="match_parent"
         android:layout_height="80dp"
-        app:menu="@menu/bottom_menu"
-        app:itemTextColor="@color/white"
-        app:itemIconTint="@color/white"
         android:background="@color/purple"
         app:itemActiveIndicatorStyle="@style/App.custom.indicator"
+        app:itemIconTint="@color/white"
+        app:itemTextColor="@color/white"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"/>
+        app:layout_constraintStart_toStartOf="parent"
+        app:menu="@menu/bottom_menu" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

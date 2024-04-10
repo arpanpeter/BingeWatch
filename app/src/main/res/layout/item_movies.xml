@@ -47,5 +47,19 @@
         app:layout_constraintStart_toEndOf="@+id/movieImage"
         app:layout_constraintTop_toBottomOf="@+id/movieTitle" />
 
+    <TextView
+        android:id="@+id/Rating"
+        android:layout_width="0dp"
+        android:textColor="@color/purple"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:text="rating"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.864"
+        app:layout_constraintStart_toEndOf="@+id/movieImage"
+        app:layout_constraintStart_toStartOf="@+id/movieDescription"
+        app:layout_constraintTop_toBottomOf="@+id/movieDescription" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
