@@ -29,7 +29,7 @@ class FavesFragment : Fragment() {
 
         recyclerView = view.findViewById(R.id.recyclerFavourites)
         recyclerView.layoutManager = LinearLayoutManager(requireContext())
-        favouriteAdapter = FavouriteAdapter()
+        favouriteAdapter = FavouriteAdapter(requireContext())
         recyclerView.adapter = favouriteAdapter
 
         // Fetch movies from the database asynchronously
