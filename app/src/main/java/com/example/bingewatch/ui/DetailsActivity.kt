@@ -4,38 +4,42 @@ import android.os.Bundle
 import android.widget.ImageView
 import android.widget.RatingBar
 import android.widget.TextView
-import androidx.activity.enableEdgeToEdge
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.bitmap.CenterCrop
+import com.example.bingewatch.db.MovieDatabase
+import com.example.bingewatch.models.Movie
 import com.example.newsprojectpractice.R
-
-//const val MOVIE_BACKDROP = "extra_movie_backdrop"
-//const val MOVIE_POSTER = "extra_movie_poster"
-////const val MOVIE_TITLE = "extra_movie_title"
-//const val MOVIE_RATING = "extra_movie_rating"
-//const val MOVIE_RELEASE_DATE = "extra_movie_release_date"
-//const val MOVIE_OVERVIEW = "extra_movie_overview"
+import com.google.android.material.floatingactionbutton.FloatingActionButton
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 
 class DetailsActivity : AppCompatActivity() {
     private lateinit var backdrop: ImageView
     private lateinit var poster: ImageView
-    private lateinit var title: TextView
-    private lateinit var rating: RatingBar
-    private lateinit var releaseDate: TextView
-    private lateinit var overview: TextView
+    private lateinit var titleTextView: TextView
+    private lateinit var ratingBar: RatingBar
+    private lateinit var releaseDateTextView: TextView
+    private lateinit var overviewTextView: TextView
+    private lateinit var saveFab: FloatingActionButton
+    private lateinit var movieDatabase: MovieDatabase
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_details)
 
+        movieDatabase = MovieDatabase.getDatabase(this)
+
         backdrop = findViewById(R.id.movie_backdrop)
         poster = findViewById(R.id.movie_poster)
-        title = findViewById(R.id.movie_title)
-        rating = findViewById(R.id.movie_rating)
-        releaseDate = findViewById(R.id.movie_release_date)
-        overview = findViewById(R.id.movie_overview)
+        titleTextView = findViewById(R.id.movie_title)
+        ratingBar = findViewById(R.id.movie_rating)
+        releaseDateTextView = findViewById(R.id.movie_release_date)
+        overviewTextView = findViewById(R.id.movie_overview)
+        saveFab = findViewById(R.id.fab_save_movie)
+
         val extras = intent.extras
 
         if (extras != null) {
@@ -43,25 +47,47 @@ class DetailsActivity : AppCompatActivity() {
         } else {
             finish()
         }
+
+        saveFab.setOnClickListener {
+            saveMovieToDatabase(extras)
+        }
     }
 
     private fun populateDetails(extras: Bundle) {
-        extras.getString("MOVIE_BACKDROP")?.let { backdropPath ->
-            Glide.with(this)
-                .load("https://image.tmdb.org/t/p/w500$backdropPath")
-                .transform(CenterCrop())
-                .into(backdrop)
-        }
-        extras.getString("MOVIE_POSTER")?.let { posterPath ->
-            Glide.with(this)
-                .load("https://image.tmdb.org/t/p/w500$posterPath")
-                .transform(CenterCrop())
-                .into(poster)
-        }
-        title.text = extras.getString("MOVIE_TITLE", "")
-        rating.rating = extras.getFloat("MOVIE_RATING", 0f)/2
-        releaseDate.text = extras.getString("MOVIE_RELEASE_DATE", "")
-        overview.text=extras.getString("MOVIE_DESC","")
+        Glide.with(this)
+            .load("https://image.tmdb.org/t/p/w500${extras.getString("MOVIE_BACKDROP")}")
+            .transform(CenterCrop())
+            .into(backdrop)
 
+        Glide.with(this)
+            .load("https://image.tmdb.org/t/p/w500${extras.getString("MOVIE_POSTER")}")
+            .transform(CenterCrop())
+            .into(poster)
+
+        titleTextView.text = extras.getString("MOVIE_TITLE", "")
+        ratingBar.rating = extras.getFloat("MOVIE_RATING", 0f) / 2
+        releaseDateTextView.text = extras.getString("MOVIE_RELEASE_DATE", "")
+        overviewTextView.text = extras.getString("MOVIE_DESC", "")
+    }
+
+    private fun saveMovieToDatabase(extras: Bundle?) {
+        extras?.let {
+            val movie = Movie(
+                id = extras.getLong("MOVIE_ID"),
+                title = extras.getString("MOVIE_TITLE", ""),
+                overview = extras.getString("MOVIE_DESC", ""),
+                posterPath = extras.getString("MOVIE_POSTER", ""),
+                backdropPath = extras.getString("MOVIE_BACKDROP", ""),
+                rating = extras.getFloat("MOVIE_RATING", 0f),
+                releaseDate = extras.getString("MOVIE_RELEASE_DATE", "")
+            )
+
+            CoroutineScope(Dispatchers.IO).launch {
+                movieDatabase.movieDao().insertMovie(movie)
+            }
+
+            // Notify the user that the movie has been saved
+            Toast.makeText(this,"Movie Wishlisted",Toast.LENGTH_SHORT).show()
+        }
     }
 }
