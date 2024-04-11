@@ -5,11 +5,15 @@
         android:icon="@drawable/movie_icon"
         android:title="Movies" />
     <item
-        android:id="@+id/favsFragment"
+        android:id="@+id/favesFragment"
         android:icon="@drawable/fav_icon"
         android:title="Wishlist" />
     <item
         android:id="@+id/searchFragment"
         android:icon="@drawable/search_icon"
         android:title="Search" />
+    <item
+        android:id="@+id/profileFragment"
+        android:icon="@drawable/user"
+        android:title="Profile" />
 </menu>

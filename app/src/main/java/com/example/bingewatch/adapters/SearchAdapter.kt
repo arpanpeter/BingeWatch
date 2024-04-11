@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.bingewatch.models.Movie
 import com.example.bingewatch.ui.DetailsActivity
+import com.example.bingewatch.util.Constants
 import com.example.newsprojectpractice.R
 
 
@@ -50,7 +51,6 @@ class SearchAdapter(private var movies: List<Movie>,private val context: Context
         private val descriptionTextView: TextView = itemView.findViewById(R.id.movieDescription)
         private val ratingTextView: TextView = itemView.findViewById(R.id.Rating)
         private val movieImage: ImageView = itemView.findViewById(R.id.movieImage)
-        private val BASE="https://image.tmdb.org/t/p/w500/"
 
         fun bind(movie: Movie) {
             titleTextView.text = movie.title
@@ -58,7 +58,7 @@ class SearchAdapter(private var movies: List<Movie>,private val context: Context
             ratingTextView.text = "Rating: ${movie.rating}"
 
             Glide.with(itemView.context)
-                .load(BASE+movie.posterPath)
+                .load(Constants.IMAGE_BASE_URL+movie.posterPath)
                 .placeholder(R.drawable.movie_icon) // Placeholder image resource
                 .into(movieImage)
         }

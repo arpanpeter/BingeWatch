@@ -4,7 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.EditText
+import android.widget.ImageView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -19,11 +19,15 @@ class SearchFragment : Fragment() {
     private lateinit var searchAdapter: SearchAdapter
     private lateinit var recyclerView: RecyclerView
     private lateinit var searchViewModel: SearchViewModel
+    private lateinit var logoImageView: ImageView
+
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val view = inflater.inflate(R.layout.fragment_search, container, false)
 
         recyclerView = view.findViewById(R.id.recyclerSearch)
+        logoImageView = view.findViewById(R.id.logo)
+
         recyclerView.layoutManager = LinearLayoutManager(requireContext())
         searchAdapter = SearchAdapter(emptyList(),requireContext())
         recyclerView.adapter = searchAdapter
@@ -45,10 +49,12 @@ class SearchFragment : Fragment() {
             }
 
             override fun onQueryTextChange(newText: String?): Boolean {
+
                 newText?.let { query ->
                     if (query.length >= 3) { // Adjust minimum query length as needed
                         // Perform search when query text changes
                         searchViewModel.searchMovies(query)
+
                     } else {
                         // Clear search results if query length is less than 3
                         searchAdapter.updateData(emptyList())
