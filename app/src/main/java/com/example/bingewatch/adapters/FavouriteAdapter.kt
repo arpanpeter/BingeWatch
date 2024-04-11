@@ -17,10 +17,13 @@ class FavouriteAdapter(private val context: Context) : RecyclerView.Adapter<Favo
 
     private var movies: List<Movie> = listOf() // Initialize with an empty list
 
+
     fun setData(newMovies: List<Movie>) {
         movies = newMovies
         notifyDataSetChanged()
     }
+
+
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.item_movies, parent, false)
@@ -46,6 +49,9 @@ class FavouriteAdapter(private val context: Context) : RecyclerView.Adapter<Favo
 
     override fun getItemCount(): Int {
         return movies.size
+    }
+    fun getMovieAt(position: Int): Movie {
+        return movies[position]
     }
 
     inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
