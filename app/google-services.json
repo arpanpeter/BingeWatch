@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "637137008458",
+    "project_id": "bingewatch-5bc5a",
+    "storage_bucket": "bingewatch-5bc5a.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:637137008458:android:7bf080f8718d508b1373b3",
+        "android_client_info": {
+          "package_name": "com.example.newsprojectpractice"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBUtkfQ0eU7bW0dcIpR4Ct-Ii-HnokU2bs"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -22,10 +22,10 @@ interface MovieApi {
         @Query("api_key") apiKey: String
     ): Response<SearchResponse>
     @GET("movie/{movie_id}/credits")
-    suspend fun getMovieCredits(
+     fun getMovieCredits(
         @Path("movie_id") movieId: Long,
         @Query("api_key") apiKey: String = Constants.API_KEY
-    ): Response<MovieCreditsResponse>
+    ): Call<MovieCreditsResponse>
 
 
 }
