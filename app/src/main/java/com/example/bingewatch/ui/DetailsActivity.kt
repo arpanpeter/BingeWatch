@@ -6,9 +6,13 @@ import android.widget.RatingBar
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.bitmap.CenterCrop
+import com.example.bingewatch.adapters.CastAdapter
 import com.example.bingewatch.db.MovieDatabase
+import com.example.bingewatch.models.Cast
 import com.example.bingewatch.models.Movie
 import com.example.newsprojectpractice.R
 import com.google.android.material.floatingactionbutton.FloatingActionButton
@@ -25,11 +29,19 @@ class DetailsActivity : AppCompatActivity() {
     private lateinit var overviewTextView: TextView
     private lateinit var saveFab: FloatingActionButton
     private lateinit var movieDatabase: MovieDatabase
+    private lateinit var castRecyclerView: RecyclerView
+    private lateinit var castAdapter: CastAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_details)
+        setSupportActionBar(findViewById(R.id.toolbar)) // Assuming you have defined a Toolbar with id 'toolbar' in your XML layout
 
+        // Get the movieTitle from the intent extras
+        val movieTitle = intent.extras?.getString("MOVIE_TITLE")
+
+        // Set the movieTitle as the title of the AppBar
+        supportActionBar?.title = movieTitle
         movieDatabase = MovieDatabase.getDatabase(this)
 
         backdrop = findViewById(R.id.movie_backdrop)
@@ -39,11 +51,21 @@ class DetailsActivity : AppCompatActivity() {
         releaseDateTextView = findViewById(R.id.movie_release_date)
         overviewTextView = findViewById(R.id.movie_overview)
         saveFab = findViewById(R.id.fab_save_movie)
+        castRecyclerView = findViewById(R.id.castRecyclerView)
 
         val extras = intent.extras
 
         if (extras != null) {
             populateDetails(extras)
+
+            // Initialize RecyclerView and its adapter
+            castAdapter = CastAdapter(emptyList())
+            castRecyclerView.adapter = castAdapter
+            castRecyclerView.layoutManager = GridLayoutManager(this,2)
+
+            // Fetch and display cast information
+            val movieId = extras.getLong("MOVIE_ID")
+            fetchAndDisplayCast(movieId)
         } else {
             finish()
         }
@@ -70,10 +92,20 @@ class DetailsActivity : AppCompatActivity() {
         overviewTextView.text = extras.getString("MOVIE_DESC", "")
     }
 
+    private fun fetchAndDisplayCast(movieId: Long) {
+
+        val castList = listOf(
+            Cast(1, "Actor 1", "Character 1", "/profile_image_1.jpg"),
+            Cast(2, "Actor 2", "Character 2", "/profile_image_2.jpg"),
+            Cast(3, "Actor 3", "Character 3", "/profile_image_3.jpg")
+        )
+        castAdapter.updateData(castList)
+    }
+
     private fun saveMovieToDatabase(extras: Bundle?) {
         extras?.let {
             val movie = Movie(
-                id = extras.getLong("MOVIE_ID"),
+                id = extras.getLong("MOVIE_ID",-1),
                 title = extras.getString("MOVIE_TITLE", ""),
                 overview = extras.getString("MOVIE_DESC", ""),
                 posterPath = extras.getString("MOVIE_POSTER", ""),
@@ -87,7 +119,7 @@ class DetailsActivity : AppCompatActivity() {
             }
 
             // Notify the user that the movie has been saved
-            Toast.makeText(this,"Movie Wishlisted",Toast.LENGTH_SHORT).show()
+            Toast.makeText(this, "Movie Wishlisted", Toast.LENGTH_SHORT).show()
         }
     }
 }

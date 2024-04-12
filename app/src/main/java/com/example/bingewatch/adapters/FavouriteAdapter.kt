@@ -1,5 +1,6 @@
 package com.example.bingewatch.adapters
 
+import com.example.bingewatch.ui.DetailsActivity
 import android.content.Context
 import android.content.Intent
 import android.view.LayoutInflater
@@ -10,7 +11,6 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.bingewatch.models.Movie
-import com.example.bingewatch.ui.DetailsActivity
 import com.example.bingewatch.util.Constants
 import com.example.newsprojectpractice.R
 
@@ -61,10 +61,11 @@ class FavouriteAdapter(private val context: Context) : RecyclerView.Adapter<Favo
         private val movieImage: ImageView = itemView.findViewById(R.id.movieImage)
         private val rating: TextView = itemView.findViewById(R.id.Rating)
 
+
         fun bind(movie: Movie) {
             movieTitle.text = movie.title
             movieDescription.text = movie.overview
-            rating.text = "Rating: ${movie.rating}"
+            rating.text = "Rating: ${"%.1f".format(movie.rating)}"
             Glide.with(itemView.context)
                 .load(Constants.IMAGE_BASE_URL + movie.posterPath)
                 .placeholder(R.drawable.movie_icon)

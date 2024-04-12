@@ -10,7 +10,7 @@
         android:layout_marginStart="8dp"
         android:layout_marginTop="12dp"
         android:fontFamily="@font/poppins"
-        android:text="FAVOURITES"
+        android:text="YOUR WISHLIST"
 
         android:textColor="@color/purple"
         android:textSize="30sp"
