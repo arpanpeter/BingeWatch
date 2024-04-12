@@ -18,7 +18,7 @@ import com.example.newsprojectpractice.R
 class SearchAdapter(private var movies: List<Movie>,private val context: Context) : RecyclerView.Adapter<SearchAdapter.SearchViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SearchViewHolder {
-        val view = LayoutInflater.from(parent.context).inflate(R.layout.item_movies, parent, false)
+        val view = LayoutInflater.from(parent.context).inflate(R.layout.common_layout, parent, false)
         return SearchViewHolder(view)
     }
 

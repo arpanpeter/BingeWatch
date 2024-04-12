@@ -27,7 +27,7 @@ class FavouriteAdapter(private val context: Context) : RecyclerView.Adapter<Favo
 
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        val view = LayoutInflater.from(parent.context).inflate(R.layout.item_movies, parent, false)
+        val view = LayoutInflater.from(parent.context).inflate(R.layout.common_layout, parent, false)
         return ViewHolder(view)
     }
 
