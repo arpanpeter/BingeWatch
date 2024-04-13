@@ -18,28 +18,28 @@ object RetrofitInstance {
             .create(MovieApi::class.java)
     }
 
-    fun getPopularMovies(page: Int = 1) {
-        api.getPopularMovies(page = page)
-            .enqueue(object : Callback<GetMoviesResponse> {
-                override fun onResponse(
-                    call: Call<GetMoviesResponse>,
-                    response: Response<GetMoviesResponse>
-                ) {
-                    if (response.isSuccessful) {
-                        val responseBody = response.body()
-                        if (responseBody != null) {
-                            Log.d("Repository", "Movies: ${responseBody.movies}")
-                        } else {
-                            Log.d("Repository", "Response body is null")
-                        }
-                    } else {
-                        Log.d("Repository", "Failed to get response")
-                    }
-                }
-
-                override fun onFailure(call: Call<GetMoviesResponse>, t: Throwable) {
-                    Log.e("Repository", "onFailure", t)
-                }
-            })
+//    fun getPopularMovies(page: Int = 1) {
+//        api.getPopularMovies(page = page)
+//            .enqueue(object : Callback<GetMoviesResponse> {
+//                override fun onResponse(
+//                    call: Call<GetMoviesResponse>,
+//                    response: Response<GetMoviesResponse>
+//                ) {
+//                    if (response.isSuccessful) {
+//                        val responseBody = response.body()
+//                        if (responseBody != null) {
+//                            Log.d("Repository", "Movies: ${responseBody.movies}")
+//                        } else {
+//                            Log.d("Repository", "Response body is null")
+//                        }
+//                    } else {
+//                        Log.d("Repository", "Failed to get response")
+//                    }
+//                }
+//
+//                override fun onFailure(call: Call<GetMoviesResponse>, t: Throwable) {
+//                    Log.e("Repository", "onFailure", t)
+//                }
+//            })
     }
-}
+

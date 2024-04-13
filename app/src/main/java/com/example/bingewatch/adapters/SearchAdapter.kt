@@ -55,7 +55,7 @@ class SearchAdapter(private var movies: List<Movie>,private val context: Context
         fun bind(movie: Movie) {
             titleTextView.text = movie.title
             descriptionTextView.text = movie.overview
-            ratingTextView.text = "Rating: ${"%.1f".format(movie.rating)}}"
+            ratingTextView.text = "Rating: ${"%.1f".format(movie.rating)}"
 
             Glide.with(itemView.context)
                 .load(Constants.IMAGE_BASE_URL+movie.posterPath)

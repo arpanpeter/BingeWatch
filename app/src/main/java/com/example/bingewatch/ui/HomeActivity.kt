@@ -21,7 +21,7 @@ class HomeActivity : AppCompatActivity() {
         val navController = Navigation.findNavController(this, R.id.moviesNavHostFragment)
         val bottomNavigation = binding.bottomNavigationView
         NavigationUI.setupWithNavController(bottomNavigation, navController)
-        RetrofitInstance.getPopularMovies()
+       // RetrofitInstance.getPopularMovies()
     }
     @SuppressLint("MissingSuperCall")
     override fun onBackPressed() {

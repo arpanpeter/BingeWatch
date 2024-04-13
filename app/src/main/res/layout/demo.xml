@@ -3,158 +3,72 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    tools:context="com.example.bingewatch.ui.DetailsActivity">
 
     <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/appBar"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
-        tools:ignore="MissingConstraints">
+        android:layout_height="280dp"
+        android:fitsSystemWindows="true">
 
         <com.google.android.material.appbar.CollapsingToolbarLayout
             android:id="@+id/collapsing_toolbar"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:layout_scrollFlags="scroll|exitUntilCollapsed">
+            android:layout_height="match_parent"
+            android:fitsSystemWindows="true"
+            android:background="@color/purple"
 
-
-
-            <androidx.core.widget.NestedScrollView
-                android:id="@+id/nestedScrollView"
+            app:layout_scrollFlags="scroll|snap|exitUntilCollapsed">
+            <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:fillViewport="true"
-                app:layout_behavior="@string/appbar_scrolling_view_behavior">
-
-                <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_height="match_parent">
+                <ImageView
+                    android:id="@+id/movie_backdrop"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
-
-                    <ImageView
-                        android:id="@+id/movie_backdrop"
-                        android:layout_width="match_parent"
-                        android:layout_height="200dp"
-                        android:scaleType="centerCrop"
-                        android:src="@mipmap/ic_launcher"
-                        app:layout_anchor="@+id/backdrop_guideline"
-                        app:layout_anchorGravity="top|center"
-                        app:layout_collapseMode="parallax" />
-                    <androidx.cardview.widget.CardView
-                        android:id="@+id/movie_poster_card"
-                        android:layout_width="128dp"
-                        android:layout_height="172dp"
-                        android:layout_marginStart="16dp"
-                        android:layout_marginEnd="8dp"
-                        app:cardCornerRadius="4dp"
-                        app:layout_constraintBottom_toBottomOf="@+id/backdrop_guideline"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@id/backdrop_guideline">
-
-                        <ImageView
-                            android:id="@+id/movie_poster"
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:scaleType="centerCrop"
-                            android:src="@mipmap/ic_launcher" />
-                    </androidx.cardview.widget.CardView>
-
-                    <androidx.constraintlayout.widget.Guideline
-                        android:id="@+id/backdrop_guideline"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:orientation="horizontal"
-                        app:layout_constraintGuide_percent="0.4" />
-
-                    <TextView
-                        android:id="@+id/movie_title"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="16dp"
-                        android:layout_marginTop="16dp"
-                        android:layout_marginEnd="16dp"
-                        android:fontFamily="@font/poppins"
-                        android:text="TITLE"
-                        android:textColor="@android:color/black"
-                        android:textSize="18sp"
-                        android:textStyle="bold"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toEndOf="@+id/movie_poster_card"
-                        app:layout_constraintTop_toBottomOf="@+id/backdrop_guideline" />
-
-                    <TextView
-                        android:id="@+id/movie_release_date"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:textColor="#757575"
-                        android:textSize="12sp"
-                        app:layout_constraintStart_toStartOf="@+id/movie_title"
-                        app:layout_constraintTop_toBottomOf="@+id/movie_title" />
-
-                    <androidx.constraintlayout.widget.Barrier
-                        android:id="@+id/movie_poster_title_barrier"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        app:barrierDirection="bottom"
-                        app:constraint_referenced_ids="movie_rating,movie_release_date" />
-
-                    <TextView
-                        android:id="@+id/movie_overview"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="16dp"
-                        android:layout_marginTop="16dp"
-                        android:layout_marginEnd="16dp"
-                        android:textColor="@color/black"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/movie_poster_title_barrier" />
-
-                    <RatingBar
-                        android:id="@+id/movie_rating"
-                        style="@style/Widget.AppCompat.RatingBar.Small"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="8dp"
-                        android:backgroundTint="@color/purple"
-                        android:numStars="5"
-                        app:layout_constraintEnd_toEndOf="@+id/movie_poster_card"
-                        app:layout_constraintStart_toStartOf="@+id/movie_poster_card"
-                        app:layout_constraintTop_toBottomOf="@+id/movie_poster_card" />
-
-                    <androidx.recyclerview.widget.RecyclerView
-                        android:id="@+id/castRecyclerViewdemo"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="28dp"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintHorizontal_bias="0.0"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/movie_overview" />
-
-                    <com.google.android.material.floatingactionbutton.FloatingActionButton
-                        android:id="@+id/fab_save_movie"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_margin="16dp"
-                        android:src="@drawable/fav_icon"
-                        app:backgroundTint="@color/yellow"
-                        app:elevation="6dp"
-                        app:layout_constraintBottom_toTopOf="@+id/movie_title"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintHorizontal_bias="0.926"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="@+id/movie_title"
-                        app:pressedTranslationZ="12dp" />
-
-
-                </androidx.constraintlayout.widget.ConstraintLayout>
-
-            </androidx.core.widget.NestedScrollView>
-
+                    android:layout_height="match_parent"
+                    android:scaleType="centerCrop"
+                    android:src="@mipmap/ic_launcher"
+                    app:layout_collapseMode="parallax" />
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/movie_poster_card"
+                    android:layout_width="128dp"
+                    android:layout_height="172dp"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginEnd="8dp"
+                    app:cardCornerRadius="4dp"
+                    app:layout_constraintBottom_toBottomOf="@id/movie_backdrop"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/movie_backdrop"/>
+                <com.google.android.material.floatingactionbutton.FloatingActionButton
+                    android:id="@+id/fab_save_movie"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="16dp"
+                    android:src="@drawable/fav_icon"
+                    app:backgroundTint="@color/yellow"
+                    app:elevation="6dp"
+                    app:layout_constraintBottom_toBottomOf="@+id/movie_backdrop"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.926"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/movie_backdrop"
+                    app:pressedTranslationZ="12dp" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+            <androidx.appcompat.widget.Toolbar
+                android:id="@+id/toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="?actionBarSize"
+                app:layout_collapseMode="pin"
+                app:titleTextColor="@color/white" />
 
         </com.google.android.material.appbar.CollapsingToolbarLayout>
 
+
+
+
     </com.google.android.material.appbar.AppBarLayout>
+
 
 
 

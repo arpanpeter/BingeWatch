@@ -113,7 +113,7 @@ class MovieAdapter(private var movies: List<Movie>) :
         private val movieImage1: ImageView = itemView.findViewById(R.id.movieImage1)
         private val rating1: TextView = itemView.findViewById(R.id.movieRating1)
         val itemView1: View = itemView.findViewById(R.id.item1)
-         val itemView2: View = itemView.findViewById(R.id.item2)
+        val itemView2: View = itemView.findViewById(R.id.item2)
 
         private val movieTitle2: TextView = itemView.findViewById(R.id.movieTitle2)
         private val movieImage2: ImageView = itemView.findViewById(R.id.movieImage2)
@@ -153,3 +153,22 @@ class MovieAdapter(private var movies: List<Movie>) :
         }
     }
 }
+//was handling duplicacy in my list with this code but didn't work
+//fun setData(newMovies: List<Movie>) {
+//    // Filter out duplicates in the new movies list
+//    val uniqueNewMovies = newMovies.distinctBy { it.id }
+//
+//    // Filter out movies already present in the adapter's data
+//    val filteredNewMovies = uniqueNewMovies.filterNot { newMovie ->
+//        movies.any { it.id == newMovie.id }
+//    }
+//
+//    // Update the adapter's data with the filtered new movies
+//    movies = movies + filteredNewMovies
+//
+//    // Update the set of dual view type movies
+//    val newDualViewTypeMovies = filteredNewMovies.map { it.id.toInt() }.toSet()
+//    dualViewTypeMovies.addAll(newDualViewTypeMovies)
+//
+//    notifyDataSetChanged()
+//}
