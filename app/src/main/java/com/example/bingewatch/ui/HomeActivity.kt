@@ -8,9 +8,7 @@ import androidx.navigation.ui.NavigationUI
 import com.example.bingewatch.R
 import com.example.bingewatch.api.RetrofitInstance
 import com.example.bingewatch.databinding.ActivityHomeBinding
-//import com.example.newsprojectpractice.R
 
-//import com.example.newsprojectpractice.databinding.ActivityHomeBinding
 
 class HomeActivity : AppCompatActivity() {
     private lateinit var binding: ActivityHomeBinding

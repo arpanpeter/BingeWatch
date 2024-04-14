@@ -13,7 +13,6 @@ import com.bumptech.glide.Glide
 import com.example.bingewatch.R
 import com.example.bingewatch.models.Movie
 import com.example.bingewatch.util.Constants
-//import com.example.newsprojectpractice.R
 
 class FavouriteAdapter(private val context: Context) : RecyclerView.Adapter<FavouriteAdapter.ViewHolder>() {
 

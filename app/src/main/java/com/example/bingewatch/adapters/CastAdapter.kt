@@ -10,7 +10,6 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.bitmap.CircleCrop
 import com.example.bingewatch.R
 import com.example.bingewatch.models.Cast
-//import com.example.newsprojectpractice.R
 
 class CastAdapter(private var castList: List<Cast>) : RecyclerView.Adapter<CastAdapter.CastViewHolder>() {
 
@@ -36,13 +35,12 @@ class CastAdapter(private var castList: List<Cast>) : RecyclerView.Adapter<CastA
     class CastViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         private val profileImage: ImageView = itemView.findViewById(R.id.image_cast)
         private val nameTextView: TextView = itemView.findViewById(R.id.cast_name)
-      //  private val characterTextView: TextView = itemView.findViewById(R.id.character_text_view)
 
         fun bind(cast: Cast) {
-            Glide.with(itemView)
+            Glide.with(itemView.context)
                 .load("https://image.tmdb.org/t/p/w500${cast.profilePath}")
                 .transform(CircleCrop())
-                .placeholder(R.drawable.movie_icon) // Placeholder image resource
+                .placeholder(R.drawable.user)
                 .into(profileImage)
 
             nameTextView.text = cast.name

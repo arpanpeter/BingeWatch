@@ -6,16 +6,17 @@ import android.widget.RatingBar
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.bitmap.CenterCrop
 import com.example.bingewatch.R
+import com.example.bingewatch.ViewModel.MovieCreditsViewModel
 import com.example.bingewatch.adapters.CastAdapter
 import com.example.bingewatch.db.MovieDatabase
 import com.example.bingewatch.models.Cast
 import com.example.bingewatch.models.Movie
-//import com.example.newsprojectpractice.R
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -32,6 +33,7 @@ class DetailsActivity : AppCompatActivity() {
     private lateinit var movieDatabase: MovieDatabase
     private lateinit var castRecyclerView: RecyclerView
     private lateinit var castAdapter: CastAdapter
+    private lateinit var movieCreditsViewModel: MovieCreditsViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -62,7 +64,10 @@ class DetailsActivity : AppCompatActivity() {
             // Initialize RecyclerView and its adapter
             castAdapter = CastAdapter(emptyList())
             castRecyclerView.adapter = castAdapter
-            castRecyclerView.layoutManager = GridLayoutManager(this,2)
+            castRecyclerView.layoutManager = GridLayoutManager(this, 3)
+
+            // Initialize ViewModel
+            movieCreditsViewModel = ViewModelProvider(this).get(MovieCreditsViewModel::class.java)
 
             // Fetch and display cast information
             val movieId = extras.getLong("MOVIE_ID")
@@ -94,19 +99,16 @@ class DetailsActivity : AppCompatActivity() {
     }
 
     private fun fetchAndDisplayCast(movieId: Long) {
-
-        val castList = listOf(
-            Cast(1, "Actor 1", "Character 1", "/profile_image_1.jpg"),
-            Cast(2, "Actor 2", "Character 2", "/profile_image_2.jpg"),
-            Cast(3, "Actor 3", "Character 3", "/profile_image_3.jpg")
-        )
-        castAdapter.updateData(castList)
+        movieCreditsViewModel.fetchMovieCredits(movieId)
+        movieCreditsViewModel.castList.observe(this, { castList ->
+            castAdapter.updateData(castList)
+        })
     }
 
     private fun saveMovieToDatabase(extras: Bundle?) {
         extras?.let {
             val movie = Movie(
-                id = extras.getLong("MOVIE_ID",-1),
+                id = extras.getLong("MOVIE_ID", -1),
                 title = extras.getString("MOVIE_TITLE", ""),
                 overview = extras.getString("MOVIE_DESC", ""),
                 posterPath = extras.getString("MOVIE_POSTER", ""),
