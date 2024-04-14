@@ -10,9 +10,10 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.appcompat.widget.SearchView
+import com.example.bingewatch.R
 import com.example.bingewatch.ViewModel.SearchViewModel
 import com.example.bingewatch.adapters.SearchAdapter
-import com.example.newsprojectpractice.R
+//import com.example.newsprojectpractice.R
 
 class SearchFragment : Fragment() {
 

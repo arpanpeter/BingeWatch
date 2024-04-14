@@ -9,10 +9,10 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.example.bingewatch.R
 import com.example.bingewatch.models.Movie
 import com.example.bingewatch.ui.DetailsActivity
 import com.example.bingewatch.util.Constants
-import com.example.newsprojectpractice.R
 
 
 class SearchAdapter(private var movies: List<Movie>,private val context: Context) : RecyclerView.Adapter<SearchAdapter.SearchViewHolder>() {

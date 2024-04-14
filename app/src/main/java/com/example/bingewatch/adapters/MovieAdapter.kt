@@ -10,9 +10,10 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.example.bingewatch.R
 import com.example.bingewatch.models.Movie
 import com.example.bingewatch.util.Constants
-import com.example.newsprojectpractice.R
+//import com.example.newsprojectpractice.R
 
 class MovieAdapter(private var movies: List<Movie>) :
     RecyclerView.Adapter<RecyclerView.ViewHolder>() {
@@ -153,7 +154,7 @@ class MovieAdapter(private var movies: List<Movie>) :
         }
     }
 }
-//was handling duplicacy in my list with this code but didn't work
+//was handling duplicates in my list with this code but didn't work
 //fun setData(newMovies: List<Movie>) {
 //    // Filter out duplicates in the new movies list
 //    val uniqueNewMovies = newMovies.distinctBy { it.id }

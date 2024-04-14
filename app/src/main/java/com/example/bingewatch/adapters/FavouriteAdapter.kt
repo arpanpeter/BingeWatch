@@ -10,9 +10,10 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.example.bingewatch.R
 import com.example.bingewatch.models.Movie
 import com.example.bingewatch.util.Constants
-import com.example.newsprojectpractice.R
+//import com.example.newsprojectpractice.R
 
 class FavouriteAdapter(private val context: Context) : RecyclerView.Adapter<FavouriteAdapter.ViewHolder>() {
 
@@ -55,7 +56,7 @@ class FavouriteAdapter(private val context: Context) : RecyclerView.Adapter<Favo
         return movies[position]
     }
 
-    inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         private val movieTitle: TextView = itemView.findViewById(R.id.movieTitle)
         private val movieDescription: TextView = itemView.findViewById(R.id.movieDescription)
         private val movieImage: ImageView = itemView.findViewById(R.id.movieImage)

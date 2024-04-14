@@ -10,9 +10,10 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.bingewatch.R
 import com.example.bingewatch.ViewModel.MoviesViewModel
 import com.example.bingewatch.adapters.MovieAdapter
-import com.example.newsprojectpractice.R
+//import com.example.newsprojectpractice.R
 
 class MoviesFragment : Fragment() {
 

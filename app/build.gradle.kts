@@ -7,11 +7,11 @@ plugins {
 }
 
 android {
-    namespace = "com.example.newsprojectpractice"
+    namespace = "com.example.bingewatch"
     compileSdk = 34
 
     defaultConfig {
-        applicationId = "com.example.newsprojectpractice"
+        applicationId = "com.example.bingewatch"
         minSdk = 28
         targetSdk = 34
         versionCode = 1

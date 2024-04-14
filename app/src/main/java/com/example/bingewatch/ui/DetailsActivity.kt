@@ -10,11 +10,12 @@ import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.bitmap.CenterCrop
+import com.example.bingewatch.R
 import com.example.bingewatch.adapters.CastAdapter
 import com.example.bingewatch.db.MovieDatabase
 import com.example.bingewatch.models.Cast
 import com.example.bingewatch.models.Movie
-import com.example.newsprojectpractice.R
+//import com.example.newsprojectpractice.R
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers

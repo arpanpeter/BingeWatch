@@ -7,8 +7,9 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.TextView
 import androidx.fragment.app.Fragment
+import com.example.bingewatch.R
 import com.example.bingewatch.ui.LoginActivity
-import com.example.newsprojectpractice.R
+//import com.example.newsprojectpractice.R
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.core.View
 

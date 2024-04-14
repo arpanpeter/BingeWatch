@@ -10,9 +10,10 @@ import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.bingewatch.R
 import com.example.bingewatch.adapters.FavouriteAdapter
 import com.example.bingewatch.db.MovieDatabase
-import com.example.newsprojectpractice.R
+//import com.example.newsprojectpractice.R
 import com.google.android.material.snackbar.Snackbar
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch

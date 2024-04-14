@@ -8,8 +8,9 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.bitmap.CircleCrop
+import com.example.bingewatch.R
 import com.example.bingewatch.models.Cast
-import com.example.newsprojectpractice.R
+//import com.example.newsprojectpractice.R
 
 class CastAdapter(private var castList: List<Cast>) : RecyclerView.Adapter<CastAdapter.CastViewHolder>() {
 
