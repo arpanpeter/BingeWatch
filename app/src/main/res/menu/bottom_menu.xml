@@ -3,17 +3,17 @@
     <item
         android:id="@+id/moviesFragment"
         android:icon="@drawable/movie_icon"
-        android:title="Movies" />
+        android:title="@string/movies" />
     <item
         android:id="@+id/favesFragment"
         android:icon="@drawable/fav_icon"
-        android:title="Wishlist" />
+        android:title="@string/wishlist" />
     <item
         android:id="@+id/searchFragment"
         android:icon="@drawable/search_icon"
-        android:title="Search" />
+        android:title="@string/search" />
     <item
         android:id="@+id/profileFragment"
         android:icon="@drawable/user"
-        android:title="Profile" />
+        android:title="@string/profile" />
 </menu>

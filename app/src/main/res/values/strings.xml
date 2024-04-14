@@ -3,4 +3,27 @@
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="title">TITLE</string>
+    <string name="not_registered_yet_sign_up">Not Registered Yet , Sign Up !</string>
+    <string name="sign_in">Sign In</string>
+    <string name="type_your_password">Type Your Password</string>
+    <string name="type_your_email">Type your Email</string>
+    <string name="already_registered_sign_in">Already Registered , Sign In !</string>
+    <string name="sign_up">Sign Up</string>
+    <string name="retype_your_password">Retype Your Password</string>
+    <string name="desc">DESC</string>
+    <string name="rating">rating</string>
+    <string name="movie_overview">Movie Overview</string>
+    <string name="your_wishlist">YOUR WISHLIST</string>
+    <string name="binge_now">BINGE NOW</string>
+    <string name="your_profile">YOUR PROFILE</string>
+    <string name="welcome">WELCOME</string>
+    <string name="sign_out">Sign Out</string>
+    <string name="search_movies">SEARCH MOVIES</string>
+    <string name="search_movies_here">search movies here...</string>
+    <string name="cast_image">cast_image</string>
+    <string name="cast_name">cast_name</string>
+    <string name="movies">Movies</string>
+    <string name="wishlist">Wishlist</string>
+    <string name="search">Search</string>
+    <string name="profile">Profile</string>
 </resources>

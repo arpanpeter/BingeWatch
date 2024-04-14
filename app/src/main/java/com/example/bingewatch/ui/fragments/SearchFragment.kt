@@ -13,7 +13,6 @@ import androidx.appcompat.widget.SearchView
 import com.example.bingewatch.R
 import com.example.bingewatch.ViewModel.SearchViewModel
 import com.example.bingewatch.adapters.SearchAdapter
-//import com.example.newsprojectpractice.R
 
 class SearchFragment : Fragment() {
 
@@ -46,19 +45,16 @@ class SearchFragment : Fragment() {
         val searchView = view.findViewById<SearchView>(R.id.searchView)
         searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(query: String?): Boolean {
-                // Handle search query submission if needed
                 return true
             }
 
             override fun onQueryTextChange(newText: String?): Boolean {
 
                 newText?.let { query ->
-                    if (query.length >= 3) { // Adjust minimum query length as needed
-                        // Perform search when query text changes
+                    if (query.length >= 3) {
                         searchViewModel.searchMovies(query)
 
                     } else {
-                        // Clear search results if query length is less than 3
                         searchAdapter.updateData(emptyList())
                     }
                 }
@@ -66,7 +62,6 @@ class SearchFragment : Fragment() {
             }
         })
 
-        // Observe searchResults LiveData from SearchViewModel
         searchViewModel.searchResults.observe(viewLifecycleOwner) { movies ->
             // Update RecyclerView adapter with search results
             searchAdapter.updateData(movies)

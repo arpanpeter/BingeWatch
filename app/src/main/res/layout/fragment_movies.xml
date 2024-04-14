@@ -11,7 +11,7 @@
         android:layout_marginStart="8dp"
         android:layout_marginTop="12dp"
         android:fontFamily="@font/poppins"
-        android:text="BINGE NOW"
+        android:text="@string/binge_now"
         android:textColor="@color/purple"
         android:textSize="30sp"
         android:textStyle="bold"

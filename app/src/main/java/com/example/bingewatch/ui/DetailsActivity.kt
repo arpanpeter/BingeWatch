@@ -37,12 +37,10 @@ class DetailsActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.details_collapse)
-        setSupportActionBar(findViewById(R.id.toolbar)) // Assuming you have defined a Toolbar with id 'toolbar' in your XML layout
+        setSupportActionBar(findViewById(R.id.toolbar))
 
-        // Get the movieTitle from the intent extras
         val movieTitle = intent.extras?.getString("MOVIE_TITLE")
 
-        // Set the movieTitle as the title of the AppBar
         supportActionBar?.title = movieTitle
         movieDatabase = MovieDatabase.getDatabase(this)
 
@@ -60,15 +58,12 @@ class DetailsActivity : AppCompatActivity() {
         if (extras != null) {
             populateDetails(extras)
 
-            // Initialize RecyclerView and its adapter
             castAdapter = CastAdapter(emptyList())
             castRecyclerView.adapter = castAdapter
             castRecyclerView.layoutManager = GridLayoutManager(this, 3)
 
-            // Initialize ViewModel
             movieCreditsViewModel = ViewModelProvider(this).get(MovieCreditsViewModel::class.java)
 
-            // Fetch and display cast information
             val movieId = extras.getLong("MOVIE_ID")
             fetchAndDisplayCast(movieId)
         } else {
@@ -99,9 +94,9 @@ class DetailsActivity : AppCompatActivity() {
 
     private fun fetchAndDisplayCast(movieId: Long) {
         movieCreditsViewModel.fetchMovieCredits(movieId)
-        movieCreditsViewModel.castList.observe(this, { castList ->
+        movieCreditsViewModel.castList.observe(this) { castList ->
             castAdapter.updateData(castList)
-        })
+        }
     }
 
     private fun saveMovieToDatabase(extras: Bundle?) {
@@ -120,7 +115,6 @@ class DetailsActivity : AppCompatActivity() {
                 movieDatabase.movieDao().insertMovie(movie)
             }
 
-            // Notify the user that the movie has been saved
             Toast.makeText(this, "Movie Wishlisted", Toast.LENGTH_SHORT).show()
         }
     }

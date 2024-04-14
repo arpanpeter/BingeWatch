@@ -23,7 +23,6 @@ class SearchViewModel : ViewModel() {
                 val movies = searchRepository.searchMovies(query)
                 _searchResults.postValue(movies ?: emptyList())
             } catch (e: Exception) {
-                // Handle the failure case
             }
         }
     }

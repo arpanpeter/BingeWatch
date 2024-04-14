@@ -27,21 +27,14 @@ class ProfileFragment : Fragment() {
 
         auth = FirebaseAuth.getInstance()
 
-        // Retrieve the currently logged-in user
-      //  val currentUser = auth.currentUser
 
-        // Display the username in the TextView
-       // textViewUsername.text = "Welcome, ${currentUser?.displayName}!"
-
-        // Set up click listener for the sign-out button
         buttonSignOut.setOnClickListener {
             // Sign out the user
             auth.signOut()
 
-            // Navigate back to the login/signup activity
             val intent = Intent(context, LoginActivity::class.java)
             startActivity(intent)
-            requireActivity().finish() // Close the current activity
+            requireActivity().finish()
         }
 
         return view

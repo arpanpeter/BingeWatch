@@ -1,6 +1,5 @@
 package com.example.bingewatch.ui.fragments
 
-import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -13,7 +12,6 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.bingewatch.R
 import com.example.bingewatch.ViewModel.MoviesViewModel
 import com.example.bingewatch.adapters.MovieAdapter
-//import com.example.newsprojectpractice.R
 
 class MoviesFragment : Fragment() {
 
@@ -30,9 +28,9 @@ class MoviesFragment : Fragment() {
         val adapter = MovieAdapter(emptyList())
         recyclerView.adapter = adapter
 
-        viewModel.movies.observe(viewLifecycleOwner, Observer { movies ->
+        viewModel.movies.observe(viewLifecycleOwner) { movies ->
             adapter.setData(movies ?: emptyList())
-        })
+        }
 
         viewModel.getPopularMovies(1)
 

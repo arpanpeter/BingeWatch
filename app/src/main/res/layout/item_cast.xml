@@ -1,8 +1,6 @@
-<!-- item_cast.xml -->
 
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:padding="16dp">
@@ -12,7 +10,7 @@
         android:layout_width="100dp"
         android:layout_height="100dp"
         android:src="@drawable/fav_icon"
-        android:contentDescription="cast_image"
+        android:contentDescription="@string/cast_image"
         android:scaleType="centerCrop"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
@@ -23,7 +21,7 @@
         android:id="@+id/cast_name"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:text="cast_name"
+        android:text="@string/cast_name"
         android:gravity="center"
         android:textSize="18sp"
         android:textStyle="bold"

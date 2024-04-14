@@ -15,7 +15,6 @@ class MovieCreditsViewModel : ViewModel() {
         repository.getMovieCredits(movieId, onSuccess = { castList ->
             _castList.value = castList
         }, onFailure = { errorMessage ->
-            // Handle error, maybe show a toast or update UI accordingly
         })
     }
 }

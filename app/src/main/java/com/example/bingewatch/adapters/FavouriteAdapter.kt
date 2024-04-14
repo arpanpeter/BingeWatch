@@ -16,7 +16,7 @@ import com.example.bingewatch.util.Constants
 
 class FavouriteAdapter(private val context: Context) : RecyclerView.Adapter<FavouriteAdapter.ViewHolder>() {
 
-    private var movies: List<Movie> = listOf() // Initialize with an empty list
+    private var movies: List<Movie> = listOf()
 
 
     fun setData(newMovies: List<Movie>) {
@@ -43,7 +43,6 @@ class FavouriteAdapter(private val context: Context) : RecyclerView.Adapter<Favo
             intent.putExtra("MOVIE_RELEASE_DATE", movie.releaseDate)
             intent.putExtra("MOVIE_POSTER", movie.posterPath)
             intent.putExtra("MOVIE_BACKDROP", movie.backdropPath)
-            // Pass any necessary data
             context.startActivity(intent)
         }
     }

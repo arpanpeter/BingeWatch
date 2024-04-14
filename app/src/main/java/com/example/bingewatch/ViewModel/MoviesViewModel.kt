@@ -17,7 +17,7 @@ class MoviesViewModel : ViewModel() {
     fun getPopularMovies(page: Int) {
         repository.getPopularMovies(page,
             onResponse = { movies -> _movies.postValue(movies) },
-            onFailure = { error -> /* Handle error */ })
+            onFailure = { error ->  })
     }
 
 }

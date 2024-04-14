@@ -136,12 +136,10 @@ class MovieAdapter(private var movies: List<Movie>) :
                     .placeholder(R.drawable.movie_icon)
                     .into(movieImage2)
 
-                // Make sure to set visibility for movie2 views
                 movieTitle2.visibility = View.VISIBLE
                 movieImage2.visibility = View.VISIBLE
                 rating2.visibility = View.VISIBLE
             } else {
-                // Hide movie2 views when movie2 is null
                 hideSecondMovie()
             }
         }
@@ -154,6 +152,8 @@ class MovieAdapter(private var movies: List<Movie>) :
     }
 }
 //was handling duplicates in my list with this code but didn't work
+
+
 //fun setData(newMovies: List<Movie>) {
 //    // Filter out duplicates in the new movies list
 //    val uniqueNewMovies = newMovies.distinctBy { it.id }

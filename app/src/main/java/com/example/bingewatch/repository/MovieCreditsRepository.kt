@@ -1,5 +1,4 @@
 package com.example.bingewatch.repository
-
 import com.example.bingewatch.api.RetrofitInstance
 import com.example.bingewatch.models.Cast
 import com.example.bingewatch.models.MovieCreditsResponse
@@ -20,7 +19,7 @@ class MovieCreditsRepository {
             }
 
             override fun onFailure(call: Call<MovieCreditsResponse>, t: Throwable) {
-                onFailure(t.message ?: "Unknown error")
+                onFailure(t.message ?: "ERROR")
             }
         })
     }

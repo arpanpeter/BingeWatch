@@ -34,7 +34,6 @@ class SearchAdapter(private var movies: List<Movie>,private val context: Context
             intent.putExtra("MOVIE_RELEASE_DATE",movie.releaseDate)
             intent.putExtra("MOVIE_POSTER",movie.posterPath)
             intent.putExtra("MOVIE_BACKDROP",movie.backdropPath)
-            // Pass any necessary data
             context.startActivity(intent)
         }
     }
@@ -59,7 +58,7 @@ class SearchAdapter(private var movies: List<Movie>,private val context: Context
 
             Glide.with(itemView.context)
                 .load(Constants.IMAGE_BASE_URL+movie.posterPath)
-                .placeholder(R.drawable.movie_icon) // Placeholder image resource
+                .placeholder(R.drawable.movie_icon)
                 .into(movieImage)
         }
 
