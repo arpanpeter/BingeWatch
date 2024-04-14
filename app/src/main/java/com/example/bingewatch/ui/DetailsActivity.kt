@@ -15,7 +15,6 @@ import com.example.bingewatch.R
 import com.example.bingewatch.ViewModel.MovieCreditsViewModel
 import com.example.bingewatch.adapters.CastAdapter
 import com.example.bingewatch.db.MovieDatabase
-import com.example.bingewatch.models.Cast
 import com.example.bingewatch.models.Movie
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import kotlinx.coroutines.CoroutineScope
@@ -37,7 +36,7 @@ class DetailsActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_details)
+        setContentView(R.layout.details_collapse)
         setSupportActionBar(findViewById(R.id.toolbar)) // Assuming you have defined a Toolbar with id 'toolbar' in your XML layout
 
         // Get the movieTitle from the intent extras
