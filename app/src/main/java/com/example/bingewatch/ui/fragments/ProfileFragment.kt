@@ -15,14 +15,13 @@ import com.google.firebase.firestore.core.View
 
 class ProfileFragment : Fragment() {
 
-    private lateinit var textViewUsername: TextView
+    //private lateinit var textViewUsername: TextView
     private lateinit var buttonSignOut: Button
     private lateinit var auth: FirebaseAuth
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): android.view.View? {
         val view = inflater.inflate(R.layout.fragment_profile, container, false)
 
-       //// textViewUsername = view.findViewById(R.id.textViewUsername)
         buttonSignOut = view.findViewById(R.id.buttonSignOut)
 
         auth = FirebaseAuth.getInstance()

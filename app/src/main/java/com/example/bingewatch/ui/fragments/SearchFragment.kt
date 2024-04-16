@@ -28,13 +28,12 @@ class SearchFragment : Fragment() {
 
         recyclerView = view.findViewById(R.id.recyclerSearch)
         logoImageView = view.findViewById(R.id.logo)
-
         recyclerView.layoutManager = LinearLayoutManager(requireContext())
         searchAdapter = SearchAdapter(emptyList(),requireContext())
         recyclerView.adapter = searchAdapter
 
         // Initialize SearchViewModel
-        searchViewModel = ViewModelProvider(this).get(SearchViewModel::class.java)
+        searchViewModel = ViewModelProvider(this)[SearchViewModel::class.java]
 
         setupSearchView(view)
 

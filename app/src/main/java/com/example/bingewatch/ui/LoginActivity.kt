@@ -35,7 +35,7 @@ class LoginActivity : AppCompatActivity() {
                         val intent = Intent(this, HomeActivity::class.java)
                         startActivity(intent)
                     } else {
-                        Toast.makeText(this,"Invalid Input", Toast.LENGTH_SHORT).show()
+                        Toast.makeText(this, "Please Sign UP", Toast.LENGTH_SHORT).show()
 
                     }
                 }
@@ -49,7 +49,7 @@ class LoginActivity : AppCompatActivity() {
     override fun onStart() {
         super.onStart()
 
-        if(firebaseAuth.currentUser != null){
+        if (firebaseAuth.currentUser != null) {
             val intent = Intent(this, HomeActivity::class.java)
             startActivity(intent)
         }

@@ -10,6 +10,7 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.bitmap.CircleCrop
 import com.example.bingewatch.R
 import com.example.bingewatch.models.Cast
+import com.example.bingewatch.util.Constants
 
 class CastAdapter(private var castList: List<Cast>) : RecyclerView.Adapter<CastAdapter.CastViewHolder>() {
 
@@ -38,7 +39,7 @@ class CastAdapter(private var castList: List<Cast>) : RecyclerView.Adapter<CastA
 
         fun bind(cast: Cast) {
             Glide.with(itemView.context)
-                .load("https://image.tmdb.org/t/p/w500${cast.profilePath}")
+                .load(Constants.IMAGE_BASE_URL+cast.profilePath)
                 .transform(CircleCrop())
                 .placeholder(R.drawable.user)
                 .into(profileImage)

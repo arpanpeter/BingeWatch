@@ -26,6 +26,7 @@ class HomeActivity : AppCompatActivity() {
     @SuppressLint("MissingSuperCall")
     override fun onBackPressed() {
         // Close the app when back button is pressed in HomeActivity
+        //saari parent activities bhi closed
         finishAffinity()
     }
 

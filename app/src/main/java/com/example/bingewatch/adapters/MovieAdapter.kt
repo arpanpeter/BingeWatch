@@ -153,7 +153,6 @@ class MovieAdapter(private var movies: List<Movie>) :
 }
 //was handling duplicates in my list with this code but didn't work
 
-
 //fun setData(newMovies: List<Movie>) {
 //    // Filter out duplicates in the new movies list
 //    val uniqueNewMovies = newMovies.distinctBy { it.id }

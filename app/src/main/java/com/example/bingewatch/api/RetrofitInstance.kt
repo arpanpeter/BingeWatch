@@ -1,6 +1,4 @@
 package com.example.bingewatch.api
-
-
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import com.example.bingewatch.util.Constants
