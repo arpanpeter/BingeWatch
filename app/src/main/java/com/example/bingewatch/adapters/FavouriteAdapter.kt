@@ -1,37 +1,29 @@
 package com.example.bingewatch.adapters
 
-import com.example.bingewatch.ui.DetailsActivity
 import android.content.Context
 import android.content.Intent
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
-import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import com.bumptech.glide.Glide
 import com.example.bingewatch.R
 import com.example.bingewatch.models.Movie
-import com.example.bingewatch.util.Constants
+import com.example.bingewatch.ui.DetailsActivity
 
-class FavouriteAdapter(private val context: Context) : RecyclerView.Adapter<FavouriteAdapter.ViewHolder>() {
+class FavouriteAdapter(private val context: Context) : RecyclerView.Adapter<FavouriteViewHolder>() {
 
     private var movies: List<Movie> = listOf()
-
 
     fun setData(newMovies: List<Movie>) {
         movies = newMovies
         notifyDataSetChanged()
     }
 
-
-
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): FavouriteViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.common_layout, parent, false)
-        return ViewHolder(view)
+        return FavouriteViewHolder(view)
     }
 
-    override fun onBindViewHolder(holder: ViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: FavouriteViewHolder, position: Int) {
         val movie = movies[position]
         holder.bind(movie)
         holder.itemView.setOnClickListener {
@@ -50,25 +42,8 @@ class FavouriteAdapter(private val context: Context) : RecyclerView.Adapter<Favo
     override fun getItemCount(): Int {
         return movies.size
     }
+
     fun getMovieAt(position: Int): Movie {
         return movies[position]
-    }
-
-     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        private val movieTitle: TextView = itemView.findViewById(R.id.movieTitle)
-        private val movieDescription: TextView = itemView.findViewById(R.id.movieDescription)
-        private val movieImage: ImageView = itemView.findViewById(R.id.movieImage)
-        private val rating: TextView = itemView.findViewById(R.id.Rating)
-
-
-        fun bind(movie: Movie) {
-            movieTitle.text = movie.title
-            movieDescription.text = movie.overview
-            rating.text = "Rating: ${"%.1f".format(movie.rating)}"
-            Glide.with(itemView.context)
-                .load(Constants.IMAGE_BASE_URL + movie.posterPath)
-                .placeholder(R.drawable.movie_icon)
-                .into(movieImage)
-        }
     }
 }

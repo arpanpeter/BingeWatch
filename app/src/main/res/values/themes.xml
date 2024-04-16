@@ -5,6 +5,8 @@
          <item name="colorPrimary">@color/purple</item>
          <item name="colorPrimaryVariant">@color/purple</item>
          <item name="android:statusBarColor">@color/purple</item>
+<!--        <item name="android:textColorPrimary">@color/white</item>-->
+
     </style>
 
     <style name="Theme.BingeWatch" parent="Base.Theme.BingeWatch" />

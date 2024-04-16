@@ -42,6 +42,11 @@ class SearchFragment : Fragment() {
 
     private fun setupSearchView(view: View) {
         val searchView = view.findViewById<SearchView>(R.id.searchView)
+
+        searchView.setOnClickListener {
+            searchView.isIconified = false
+            searchView.requestFocus()
+        }
         searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(query: String?): Boolean {
                 return true

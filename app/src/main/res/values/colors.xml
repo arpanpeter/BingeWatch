@@ -4,4 +4,6 @@
     <color name="white">#FFFFFFFF</color>
     <color name="purple">#593c8f</color>
     <color name="yellow">#ffc000</color>
+    <color name="overlay_color">#80000000</color>
+
 </resources>

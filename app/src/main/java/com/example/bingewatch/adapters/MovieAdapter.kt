@@ -1,18 +1,13 @@
 package com.example.bingewatch.adapters
 
-import com.example.bingewatch.ui.DetailsActivity
 import android.content.Context
 import android.content.Intent
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
-import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import com.bumptech.glide.Glide
 import com.example.bingewatch.R
 import com.example.bingewatch.models.Movie
-import com.example.bingewatch.util.Constants
+import com.example.bingewatch.ui.DetailsActivity
 
 class MovieAdapter(private var movies: List<Movie>) :
     RecyclerView.Adapter<RecyclerView.ViewHolder>() {
@@ -90,84 +85,4 @@ class MovieAdapter(private var movies: List<Movie>) :
         movies = newMovies
         notifyDataSetChanged()
     }
-
-    class SingleViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        private val movieTitle: TextView = itemView.findViewById(R.id.movieTitle)
-        private val movieDescription: TextView = itemView.findViewById(R.id.movieDescription)
-        private val movieImage: ImageView = itemView.findViewById(R.id.movieImage)
-        private val rating: TextView = itemView.findViewById(R.id.Rating)
-
-        fun bind(movie: Movie) {
-            movieTitle.text = movie.title
-            movieDescription.text = movie.overview
-            rating.text = "Rating: ${"%.1f".format(movie.rating)}"
-            Glide.with(itemView.context)
-                .load(Constants.IMAGE_BASE_URL + movie.posterPath)
-                .placeholder(R.drawable.movie_icon)
-                .into(movieImage)
-        }
-    }
-
-    class DualViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        private val movieTitle1: TextView = itemView.findViewById(R.id.movieTitle1)
-        private val movieImage1: ImageView = itemView.findViewById(R.id.movieImage1)
-        private val rating1: TextView = itemView.findViewById(R.id.movieRating1)
-        val itemView1: View = itemView.findViewById(R.id.item1)
-        val itemView2: View = itemView.findViewById(R.id.item2)
-
-        private val movieTitle2: TextView = itemView.findViewById(R.id.movieTitle2)
-        private val movieImage2: ImageView = itemView.findViewById(R.id.movieImage2)
-        private val rating2: TextView = itemView.findViewById(R.id.movieRating2)
-
-
-        fun bind(movie1: Movie, movie2: Movie?) {
-            movieTitle1.text = movie1.title
-            rating1.text = "Rating: ${"%.1f".format(movie1.rating)}"
-            Glide.with(itemView.context)
-                .load(Constants.IMAGE_BASE_URL + movie1.posterPath)
-                .placeholder(R.drawable.movie_icon)
-                .into(movieImage1)
-
-            if (movie2 != null) {
-                movieTitle2.text = movie2.title
-                rating2.text = "Rating: ${"%.1f".format(movie2.rating)}"
-                Glide.with(itemView.context)
-                    .load(Constants.IMAGE_BASE_URL + movie2.posterPath)
-                    .placeholder(R.drawable.movie_icon)
-                    .into(movieImage2)
-
-                movieTitle2.visibility = View.VISIBLE
-                movieImage2.visibility = View.VISIBLE
-                rating2.visibility = View.VISIBLE
-            } else {
-                hideSecondMovie()
-            }
-        }
-
-        private fun hideSecondMovie() {
-            movieTitle2.visibility = View.INVISIBLE
-            movieImage2.visibility = View.INVISIBLE
-            rating2.visibility = View.INVISIBLE
-        }
-    }
 }
-//was handling duplicates in my list with this code but didn't work
-
-//fun setData(newMovies: List<Movie>) {
-//    // Filter out duplicates in the new movies list
-//    val uniqueNewMovies = newMovies.distinctBy { it.id }
-//
-//    // Filter out movies already present in the adapter's data
-//    val filteredNewMovies = uniqueNewMovies.filterNot { newMovie ->
-//        movies.any { it.id == newMovie.id }
-//    }
-//
-//    // Update the adapter's data with the filtered new movies
-//    movies = movies + filteredNewMovies
-//
-//    // Update the set of dual view type movies
-//    val newDualViewTypeMovies = filteredNewMovies.map { it.id.toInt() }.toSet()
-//    dualViewTypeMovies.addAll(newDualViewTypeMovies)
-//
-//    notifyDataSetChanged()
-//}

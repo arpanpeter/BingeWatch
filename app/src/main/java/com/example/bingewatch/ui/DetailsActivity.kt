@@ -58,7 +58,7 @@ class DetailsActivity : AppCompatActivity() {
         if (extras != null) {
             populateDetails(extras)
 
-            castAdapter = CastAdapter(emptyList())
+            castAdapter = CastAdapter(emptyList(),9)
             castRecyclerView.adapter = castAdapter
             castRecyclerView.layoutManager = GridLayoutManager(this, 3)
 
