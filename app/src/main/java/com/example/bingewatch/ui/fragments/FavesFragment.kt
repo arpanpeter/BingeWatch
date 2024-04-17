@@ -44,6 +44,11 @@ class FavesFragment : Fragment() {
     }
 
     private fun fetchMovies() {
+        if (!isAdded) {
+            // Fragment is not attached, return early
+            return
+        }
+
         lifecycleScope.launch {
             val allMovies = withContext(Dispatchers.IO) {
                 val movieDao = MovieDatabase.getDatabase(requireContext()).movieDao()
@@ -52,6 +57,7 @@ class FavesFragment : Fragment() {
             favouriteAdapter.setData(allMovies)
         }
     }
+
 
     private fun attachSwipeToDelete() {
         val itemTouchHelperCallback = object : ItemTouchHelper.SimpleCallback(
@@ -69,43 +75,52 @@ class FavesFragment : Fragment() {
                 val position = viewHolder.adapterPosition
                 val deletedMovie = favouriteAdapter.getMovieAt(position)
 
-                // Delete the swiped movie from the database
-                lifecycleScope.launch {
-                    withContext(Dispatchers.IO) {
-                        val movieDao = MovieDatabase.getDatabase(requireContext()).movieDao()
-                        movieDao.deleteMovieById(deletedMovie.id)
-                    }
-                }
-
-                // Show Snackbar with an undo option
-                val snackbar = Snackbar.make(
-                    requireView(),
-                    "Movie deleted",
-                    Snackbar.LENGTH_LONG
-                )
-                snackbar.setAction("Undo") {
-                    // Undo the deletion by inserting the movie back into the database
+                try {
+                    val context = requireContext()
+                    // Delete the swiped movie from the database
                     lifecycleScope.launch {
                         withContext(Dispatchers.IO) {
-                            val movieDao = MovieDatabase.getDatabase(requireContext()).movieDao()
-                            movieDao.insertMovie(deletedMovie)
+                            val movieDao = MovieDatabase.getDatabase(context).movieDao()
+                            movieDao.deleteMovieById(deletedMovie.id)
                         }
-
-                        // Fetch the updated list of movies after undo and update the adapter
-                        fetchMovies()
                     }
-                }
-                snackbar.setActionTextColor(
-                    ContextCompat.getColor(
-                        requireContext(),
-                        R.color.purple
+
+                    // Show Snackbar with an undo option
+                    val snackbar = Snackbar.make(
+                        requireView(),
+                        "Movie deleted",
+                        Snackbar.LENGTH_LONG
                     )
-                )
-                snackbar.show()
+                    snackbar.setAction("Undo") {
+                        // Undo the deletion by inserting the movie back into the database
+                        lifecycleScope.launch {
+                            withContext(Dispatchers.IO) {
+                                val movieDao = MovieDatabase.getDatabase(context).movieDao()
+                                movieDao.insertMovie(deletedMovie)
+                            }
+
+                            // Fetch the updated list of movies after undo and update the adapter
+                            fetchMovies()
+                        }
+                    }
+                    snackbar.setActionTextColor(
+                        ContextCompat.getColor(
+                            requireContext(),
+                            R.color.purple
+                        )
+                    )
+                    snackbar.show()
+                } catch (e: IllegalStateException) {
+                    // Fragment is not attached, handle accordingly
+                    return
+                }
             }
         }
 
         val itemTouchHelper = ItemTouchHelper(itemTouchHelperCallback)
         itemTouchHelper.attachToRecyclerView(recyclerView)
     }
+
+
+
 }

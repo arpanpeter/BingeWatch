@@ -7,15 +7,18 @@
 
     <de.hdodenhof.circleimageview.CircleImageView
         android:id="@+id/image_cast"
-        android:layout_width="100dp"
+        android:layout_width="80dp"
         android:layout_height="100dp"
         android:src="@drawable/fav_icon"
         android:contentDescription="@string/cast_image"
+        app:civ_border_width="2dp"
         android:scaleType="centerCrop"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"
-        android:layout_marginEnd="16dp"/>
+        app:civ_border_color="@color/white"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toTopOf="parent"
+    app:layout_constraintBottom_toBottomOf="parent"
+    android:layout_marginEnd="16dp"/>
+
 
     <TextView
         android:id="@+id/cast_name"

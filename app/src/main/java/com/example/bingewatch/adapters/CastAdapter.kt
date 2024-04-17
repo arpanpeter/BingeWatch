@@ -6,7 +6,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.bingewatch.R
 import com.example.bingewatch.models.Cast
 
-class CastAdapter(private var castList: List<Cast>, private val maxItemsToShow: Int) : RecyclerView.Adapter<CastViewHolder>() {
+class CastAdapter(private var castList: List<Cast>) : RecyclerView.Adapter<CastViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CastViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.item_cast, parent, false)
@@ -19,7 +19,7 @@ class CastAdapter(private var castList: List<Cast>, private val maxItemsToShow: 
     }
 
     override fun getItemCount(): Int {
-        return if (castList.size > maxItemsToShow) maxItemsToShow else castList.size
+        return castList.size
     }
 
     fun updateData(newCastList: List<Cast>) {

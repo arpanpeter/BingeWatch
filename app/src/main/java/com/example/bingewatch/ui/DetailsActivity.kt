@@ -1,11 +1,13 @@
 package com.example.bingewatch.ui
 
+import android.content.res.ColorStateList
 import android.os.Bundle
 import android.widget.ImageView
 import android.widget.RatingBar
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -22,6 +24,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
 class DetailsActivity : AppCompatActivity() {
+
     private lateinit var backdrop: ImageView
     private lateinit var poster: ImageView
     private lateinit var titleTextView: TextView
@@ -33,6 +36,7 @@ class DetailsActivity : AppCompatActivity() {
     private lateinit var castRecyclerView: RecyclerView
     private lateinit var castAdapter: CastAdapter
     private lateinit var movieCreditsViewModel: MovieCreditsViewModel
+    private var isMovieSaved = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -40,8 +44,8 @@ class DetailsActivity : AppCompatActivity() {
         setSupportActionBar(findViewById(R.id.toolbar))
 
         val movieTitle = intent.extras?.getString("MOVIE_TITLE")
-
         supportActionBar?.title = movieTitle
+
         movieDatabase = MovieDatabase.getDatabase(this)
 
         backdrop = findViewById(R.id.movie_backdrop)
@@ -58,20 +62,27 @@ class DetailsActivity : AppCompatActivity() {
         if (extras != null) {
             populateDetails(extras)
 
-            castAdapter = CastAdapter(emptyList(),9)
+            castAdapter = CastAdapter(emptyList())
             castRecyclerView.adapter = castAdapter
             castRecyclerView.layoutManager = GridLayoutManager(this, 3)
 
-            movieCreditsViewModel = ViewModelProvider(this).get(MovieCreditsViewModel::class.java)
+            movieCreditsViewModel = ViewModelProvider(this)[MovieCreditsViewModel::class.java]
 
             val movieId = extras.getLong("MOVIE_ID")
             fetchAndDisplayCast(movieId)
+
+            isMovieSaved = isMovieSavedInDatabase(movieId)
+            updateFabColor()
         } else {
             finish()
         }
 
         saveFab.setOnClickListener {
-            saveMovieToDatabase(extras)
+            if (isMovieSaved) {
+                deleteMovieFromDatabase(extras)
+            } else {
+                saveMovieToDatabase(extras)
+            }
         }
     }
 
@@ -99,6 +110,17 @@ class DetailsActivity : AppCompatActivity() {
         }
     }
 
+    private fun isMovieSavedInDatabase(movieId: Long): Boolean {
+        var isSaved = false
+        CoroutineScope(Dispatchers.IO).launch {
+            val movie = movieDatabase.movieDao().getMovieById(movieId)
+            isSaved = movie != null
+        }
+        return isSaved
+    }
+
+
+
     private fun saveMovieToDatabase(extras: Bundle?) {
         extras?.let {
             val movie = Movie(
@@ -115,7 +137,27 @@ class DetailsActivity : AppCompatActivity() {
                 movieDatabase.movieDao().insertMovie(movie)
             }
 
-            Toast.makeText(this, "Movie Wishlisted", Toast.LENGTH_SHORT).show()
+            isMovieSaved = true
+            updateFabColor()
+            Toast.makeText(this, "Added To WishList", Toast.LENGTH_SHORT).show()
         }
+    }
+
+    private fun deleteMovieFromDatabase(extras: Bundle?) {
+        extras?.let {
+            // Implement deletion logic based on your database
+            isMovieSaved = false
+            updateFabColor()
+            Toast.makeText(this, "Movie Removed from Wishlist", Toast.LENGTH_SHORT).show()
+        }
+    }
+
+    private fun updateFabColor() {
+        val color = if (isMovieSaved) {
+            ContextCompat.getColor(this, R.color.purple)
+        } else {
+            ContextCompat.getColor(this, R.color.yellow)
+        }
+        saveFab.backgroundTintList = ColorStateList.valueOf(color)
     }
 }
