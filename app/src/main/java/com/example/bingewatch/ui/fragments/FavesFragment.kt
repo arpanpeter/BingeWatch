@@ -37,7 +37,6 @@ class FavesFragment : Fragment() {
         recyclerView.adapter = favouriteAdapter
 
         attachSwipeToDelete()
-
         fetchMovies()
 
         return view
@@ -45,7 +44,6 @@ class FavesFragment : Fragment() {
 
     private fun fetchMovies() {
         if (!isAdded) {
-            // Fragment is not attached, return early
             return
         }
 
@@ -77,7 +75,6 @@ class FavesFragment : Fragment() {
 
                 try {
                     val context = requireContext()
-                    // Delete the swiped movie from the database
                     lifecycleScope.launch {
                         withContext(Dispatchers.IO) {
                             val movieDao = MovieDatabase.getDatabase(context).movieDao()
@@ -85,7 +82,6 @@ class FavesFragment : Fragment() {
                         }
                     }
 
-                    // Show Snackbar with an undo option
                     val snackbar = Snackbar.make(
                         requireView(),
                         "Movie deleted",
@@ -98,7 +94,6 @@ class FavesFragment : Fragment() {
                                 val movieDao = MovieDatabase.getDatabase(context).movieDao()
                                 movieDao.insertMovie(deletedMovie)
                             }
-
                             // Fetch the updated list of movies after undo and update the adapter
                             fetchMovies()
                         }
@@ -111,7 +106,7 @@ class FavesFragment : Fragment() {
                     )
                     snackbar.show()
                 } catch (e: IllegalStateException) {
-                    // Fragment is not attached, handle accordingly
+                    // I am returning from the function in this case
                     return
                 }
             }
@@ -120,7 +115,6 @@ class FavesFragment : Fragment() {
         val itemTouchHelper = ItemTouchHelper(itemTouchHelperCallback)
         itemTouchHelper.attachToRecyclerView(recyclerView)
     }
-
 
 
 }

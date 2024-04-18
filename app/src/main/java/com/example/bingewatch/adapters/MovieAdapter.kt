@@ -35,6 +35,7 @@ class MovieAdapter(private var movies: List<Movie>) :
     }
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
+
         when (holder) {
             is SingleViewHolder -> {
                 holder.bind(movies[position])

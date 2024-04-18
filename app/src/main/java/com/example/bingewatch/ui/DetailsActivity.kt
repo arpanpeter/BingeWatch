@@ -36,7 +36,7 @@ class DetailsActivity : AppCompatActivity() {
     private lateinit var castRecyclerView: RecyclerView
     private lateinit var castAdapter: CastAdapter
     private lateinit var movieCreditsViewModel: MovieCreditsViewModel
-    private var isMovieSaved = false
+    private var isMovieSaved: Boolean = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -70,9 +70,12 @@ class DetailsActivity : AppCompatActivity() {
 
             val movieId = extras.getLong("MOVIE_ID")
             fetchAndDisplayCast(movieId)
+            isMovieSavedInDatabase(movieId)
 
-            isMovieSaved = isMovieSavedInDatabase(movieId)
-            updateFabColor()
+            // Restore isMovieSaved state from savedInstanceState
+            isMovieSaved = savedInstanceState?.getBoolean("IS_MOVIE_SAVED") ?: false
+            updateFabColor(isMovieSaved)
+
         } else {
             finish()
         }
@@ -84,6 +87,12 @@ class DetailsActivity : AppCompatActivity() {
                 saveMovieToDatabase(extras)
             }
         }
+    }
+
+    override fun onSaveInstanceState(outState: Bundle) {
+        // Save the state of isMovieSaved
+        outState.putBoolean("IS_MOVIE_SAVED", isMovieSaved)
+        super.onSaveInstanceState(outState)
     }
 
     private fun populateDetails(extras: Bundle) {
@@ -115,11 +124,10 @@ class DetailsActivity : AppCompatActivity() {
         CoroutineScope(Dispatchers.IO).launch {
             val movie = movieDatabase.movieDao().getMovieById(movieId)
             isSaved = movie != null
+            updateFabColor(isSaved)
         }
         return isSaved
     }
-
-
 
     private fun saveMovieToDatabase(extras: Bundle?) {
         extras?.let {
@@ -138,22 +146,28 @@ class DetailsActivity : AppCompatActivity() {
             }
 
             isMovieSaved = true
-            updateFabColor()
+            updateFabColor(true)
             Toast.makeText(this, "Added To WishList", Toast.LENGTH_SHORT).show()
         }
     }
 
     private fun deleteMovieFromDatabase(extras: Bundle?) {
         extras?.let {
-            // Implement deletion logic based on your database
-            isMovieSaved = false
-            updateFabColor()
-            Toast.makeText(this, "Movie Removed from Wishlist", Toast.LENGTH_SHORT).show()
+            val movieId = extras.getLong("MOVIE_ID", -1)
+            if (movieId != -1L) {
+                CoroutineScope(Dispatchers.IO).launch {
+                    // Delete movie from the database
+                    movieDatabase.movieDao().deleteMovieById(movieId)
+                }
+                isMovieSaved = false
+                updateFabColor(false)
+                Toast.makeText(this, "Movie Removed from Wishlist", Toast.LENGTH_SHORT).show()
+            }
         }
     }
 
-    private fun updateFabColor() {
-        val color = if (isMovieSaved) {
+    private fun updateFabColor(isSaved: Boolean) {
+        val color = if (isSaved) {
             ContextCompat.getColor(this, R.color.purple)
         } else {
             ContextCompat.getColor(this, R.color.yellow)
