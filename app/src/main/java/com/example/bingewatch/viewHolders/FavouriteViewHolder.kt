@@ -1,4 +1,4 @@
-package com.example.bingewatch.adapters
+package com.example.bingewatch.viewHolders
 
 
 import android.view.View

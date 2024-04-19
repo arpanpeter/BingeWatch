@@ -42,7 +42,21 @@
                 android:background="?attr/colorPrimary"
                 app:collapsedTitleTextColor="@color/purple"
                 app:layout_collapseMode="pin"
-                app:popupTheme="@style/Base.Theme.BingeWatch" />
+                app:popupTheme="@style/Base.Theme.BingeWatch"
+                >
+                <ImageButton
+                    android:id="@+id/back_press_button"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/back"
+                    android:layout_gravity="start"
+                    android:background="?attr/selectableItemBackgroundBorderless"
+                    android:padding="16dp" />
+
+
+
+
+            </androidx.appcompat.widget.Toolbar>
 
         </com.google.android.material.appbar.CollapsingToolbarLayout>
 

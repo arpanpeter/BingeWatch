@@ -8,6 +8,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.bingewatch.R
 import com.example.bingewatch.models.Movie
 import com.example.bingewatch.ui.DetailsActivity
+import com.example.bingewatch.viewHolders.SearchViewHolder
 
 class SearchAdapter(private var movies: List<Movie>, private val context: Context) : RecyclerView.Adapter<SearchViewHolder>() {
 

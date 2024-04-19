@@ -8,6 +8,8 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.bingewatch.R
 import com.example.bingewatch.models.Movie
 import com.example.bingewatch.ui.DetailsActivity
+import com.example.bingewatch.viewHolders.DualViewHolder
+import com.example.bingewatch.viewHolders.SingleViewHolder
 
 class MovieAdapter(private var movies: List<Movie>) :
     RecyclerView.Adapter<RecyclerView.ViewHolder>() {

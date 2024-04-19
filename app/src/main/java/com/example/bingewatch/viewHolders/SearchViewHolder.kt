@@ -1,4 +1,4 @@
-package com.example.bingewatch.adapters
+package com.example.bingewatch.viewHolders
 
 import android.view.View
 import android.widget.ImageView
@@ -9,16 +9,17 @@ import com.example.bingewatch.R
 import com.example.bingewatch.models.Movie
 import com.example.bingewatch.util.Constants
 
-class SingleViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-    private val movieTitle: TextView = itemView.findViewById(R.id.movieTitle)
-    private val movieDescription: TextView = itemView.findViewById(R.id.movieDescription)
+class SearchViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+    private val titleTextView: TextView = itemView.findViewById(R.id.movieTitle)
+    private val descriptionTextView: TextView = itemView.findViewById(R.id.movieDescription)
+    private val ratingTextView: TextView = itemView.findViewById(R.id.Rating)
     private val movieImage: ImageView = itemView.findViewById(R.id.movieImage)
-    private val rating: TextView = itemView.findViewById(R.id.Rating)
 
     fun bind(movie: Movie) {
-        movieTitle.text = movie.title
-        movieDescription.text = movie.overview
-        rating.text = "Rating: ${"%.1f".format(movie.rating)}"
+        titleTextView.text = movie.title
+        descriptionTextView.text = movie.overview
+        ratingTextView.text = "Rating: ${"%.1f".format(movie.rating)}"
+
         Glide.with(itemView.context)
             .load(Constants.IMAGE_BASE_URL + movie.posterPath)
             .placeholder(R.drawable.movie_icon)

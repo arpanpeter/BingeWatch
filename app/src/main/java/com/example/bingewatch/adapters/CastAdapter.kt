@@ -5,6 +5,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.bingewatch.R
 import com.example.bingewatch.models.Cast
+import com.example.bingewatch.viewHolders.CastViewHolder
 
 class CastAdapter(private var castList: List<Cast>) : RecyclerView.Adapter<CastViewHolder>() {
 

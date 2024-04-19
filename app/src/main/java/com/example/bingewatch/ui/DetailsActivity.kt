@@ -1,10 +1,13 @@
 package com.example.bingewatch.ui
 
+import android.annotation.SuppressLint
+import android.content.Intent
 import android.content.res.ColorStateList
 import android.os.Bundle
 import android.util.Log
 import android.view.View
 import android.widget.Button
+import android.widget.ImageButton
 import android.widget.ImageView
 import android.widget.RatingBar
 import android.widget.TextView
@@ -41,12 +44,16 @@ class DetailsActivity : AppCompatActivity() {
     private lateinit var castAdapter: CastAdapter
     private lateinit var movieCreditsViewModel: MovieCreditsViewModel
     private var isMovieSaved: Boolean = false
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.details_collapse)
         setSupportActionBar(findViewById(R.id.toolbar))
-
+        val backButton: ImageButton = findViewById(R.id.back_press_button)
+        backButton.setOnClickListener {
+//            val intent=Intent(this,HomeActivity::class.java)
+//            startActivity(intent)
+            onBackPressed()
+        }
         val movieTitle = intent.extras?.getString("MOVIE_TITLE")
         supportActionBar?.title = movieTitle
 
@@ -102,6 +109,7 @@ class DetailsActivity : AppCompatActivity() {
         outState.putBoolean("IS_MOVIE_SAVED", isMovieSaved)
         super.onSaveInstanceState(outState)
     }
+
     private fun toggleCastListVisibility() {
         val recyclerView = findViewById<RecyclerView>(R.id.castRecyclerView)
         recyclerView.visibility = if (recyclerView.visibility == View.VISIBLE) {
@@ -114,16 +122,14 @@ class DetailsActivity : AppCompatActivity() {
     }
 
 
-
-
     private fun populateDetails(extras: Bundle) {
         Glide.with(this)
-            .load(Constants.IMAGE_BASE_URL+extras.getString("MOVIE_BACKDROP"))
+            .load(Constants.IMAGE_BASE_URL + extras.getString("MOVIE_BACKDROP"))
             .transform(CenterCrop())
             .into(backdrop)
 
         Glide.with(this)
-            .load(Constants.IMAGE_BASE_URL+extras.getString("MOVIE_POSTER"))
+            .load(Constants.IMAGE_BASE_URL + extras.getString("MOVIE_POSTER"))
             .transform(CenterCrop())
             .into(poster)
 
@@ -194,5 +200,11 @@ class DetailsActivity : AppCompatActivity() {
             ContextCompat.getColor(this, R.color.yellow)
         }
         saveFab.backgroundTintList = ColorStateList.valueOf(color)
+    }
+
+    @SuppressLint("MissingSuperCall")
+    override fun onBackPressed() {
+        finish()
+
     }
 }
