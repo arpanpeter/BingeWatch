@@ -6,11 +6,10 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.bingewatch.R
-import com.example.bingewatch.ViewModel.MoviesViewModel
+import com.example.bingewatch.viewModel.MoviesViewModel
 import com.example.bingewatch.adapters.MovieAdapter
 
 class MoviesFragment : Fragment() {

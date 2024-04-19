@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.TextView
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
 import com.example.bingewatch.R
 import com.example.bingewatch.ui.LoginActivity
 //import com.example.newsprojectpractice.R
@@ -37,5 +38,9 @@ class ProfileFragment : Fragment() {
         }
 
         return view
+    }
+     fun onBackPressed() {
+        // Navigate to MoviesFragment when back button is pressed
+        findNavController().navigate(R.id.moviesFragment)
     }
 }

@@ -19,7 +19,7 @@
     <string name="welcome">WELCOME</string>
     <string name="sign_out">Sign Out</string>
     <string name="search_movies">SEARCH MOVIES</string>
-    <string name="search_movies_here">search movies here...</string>
+    <string name="search_movies_here">search movies here…</string>
     <string name="cast_image">cast_image</string>
     <string name="cast_name">cast_name</string>
     <string name="movies">Movies</string>

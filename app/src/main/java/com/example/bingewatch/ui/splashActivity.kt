@@ -11,7 +11,7 @@ class splashActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_splash)
         enableEdgeToEdge()
-        val splashTimeOut: Long = 3000 //
+        val splashTimeOut: Long = 3000 // 3 sec
         val mainIntent = Intent(this, LoginActivity::class.java)
         Thread {
             Thread.sleep(splashTimeOut)

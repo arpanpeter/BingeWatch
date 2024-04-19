@@ -5,7 +5,6 @@ import androidx.room.PrimaryKey
 import com.google.gson.annotations.SerializedName
 @Entity(tableName = "movies")
 data class Movie(
-
     @SerializedName("id")
     @PrimaryKey (autoGenerate = true)
     val id: Long,

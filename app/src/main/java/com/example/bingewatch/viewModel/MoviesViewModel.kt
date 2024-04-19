@@ -1,4 +1,4 @@
-package com.example.bingewatch.ViewModel
+package com.example.bingewatch.viewModel
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData

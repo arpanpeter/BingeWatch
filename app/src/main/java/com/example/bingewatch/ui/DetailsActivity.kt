@@ -2,6 +2,9 @@ package com.example.bingewatch.ui
 
 import android.content.res.ColorStateList
 import android.os.Bundle
+import android.util.Log
+import android.view.View
+import android.widget.Button
 import android.widget.ImageView
 import android.widget.RatingBar
 import android.widget.TextView
@@ -14,10 +17,11 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.bitmap.CenterCrop
 import com.example.bingewatch.R
-import com.example.bingewatch.ViewModel.MovieCreditsViewModel
+import com.example.bingewatch.viewModel.MovieCreditsViewModel
 import com.example.bingewatch.adapters.CastAdapter
 import com.example.bingewatch.db.MovieDatabase
 import com.example.bingewatch.models.Movie
+import com.example.bingewatch.util.Constants
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -56,6 +60,10 @@ class DetailsActivity : AppCompatActivity() {
         overviewTextView = findViewById(R.id.movie_overview)
         saveFab = findViewById(R.id.fab_save_movie)
         castRecyclerView = findViewById(R.id.castRecyclerView)
+        val castHeaderTextView = findViewById<Button>(R.id.text_cast_header)
+        castHeaderTextView.setOnClickListener {
+            toggleCastListVisibility()
+        }
 
         val extras = intent.extras
 
@@ -94,15 +102,28 @@ class DetailsActivity : AppCompatActivity() {
         outState.putBoolean("IS_MOVIE_SAVED", isMovieSaved)
         super.onSaveInstanceState(outState)
     }
+    private fun toggleCastListVisibility() {
+        val recyclerView = findViewById<RecyclerView>(R.id.castRecyclerView)
+        recyclerView.visibility = if (recyclerView.visibility == View.VISIBLE) {
+            Log.d("DetailsActivity", "RecyclerView is being hidden")
+            View.GONE
+        } else {
+            Log.d("DetailsActivity", "RecyclerView is being shown")
+            View.VISIBLE
+        }
+    }
+
+
+
 
     private fun populateDetails(extras: Bundle) {
         Glide.with(this)
-            .load("https://image.tmdb.org/t/p/w500${extras.getString("MOVIE_BACKDROP")}")
+            .load(Constants.IMAGE_BASE_URL+extras.getString("MOVIE_BACKDROP"))
             .transform(CenterCrop())
             .into(backdrop)
 
         Glide.with(this)
-            .load("https://image.tmdb.org/t/p/w500${extras.getString("MOVIE_POSTER")}")
+            .load(Constants.IMAGE_BASE_URL+extras.getString("MOVIE_POSTER"))
             .transform(CenterCrop())
             .into(poster)
 

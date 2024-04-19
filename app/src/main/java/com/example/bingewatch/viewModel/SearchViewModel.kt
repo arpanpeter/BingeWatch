@@ -1,4 +1,4 @@
-package com.example.bingewatch.ViewModel
+package com.example.bingewatch.viewModel
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -15,7 +15,8 @@ class SearchViewModel : ViewModel() {
     private val searchRepository = SearchRepository(RetrofitInstance.api)
 
     private val _searchResults = MutableLiveData<List<Movie>>()
-    val searchResults: LiveData<List<Movie>> = _searchResults
+    val searchResults: LiveData<List<Movie>>
+    get() = _searchResults
 
     fun searchMovies(query: String) {
         CoroutineScope(Dispatchers.Main).launch {

@@ -17,7 +17,9 @@
         tools:targetApi="31">
         <activity
             android:name=".ui.splashActivity"
-            android:exported="true">
+            android:exported="true"
+
+            >
         <intent-filter>
             <action android:name="android.intent.action.MAIN" />
 
@@ -27,13 +29,17 @@
         <activity
             android:name=".ui.DetailsActivity"
             android:exported="false"
-            android:theme="@style/Base.Theme.BingeWatch" />
+            android:theme="@style/Base.Theme.BingeWatch"
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".ui.SignUpActivity"
-            android:exported="false" />
+            android:exported="false"
+            android:screenOrientation="portrait"
+            />
         <activity
             android:name=".ui.LoginActivity"
             android:exported="false"
+            android:screenOrientation="portrait"
 
             >
 
@@ -41,11 +47,13 @@
         <activity
             android:name=".ui.HomeActivity"
             android:exported="true"
-            android:windowSoftInputMode="adjustResize" />
+            android:windowSoftInputMode="adjustResize"
+            android:screenOrientation="portrait"/>
 
         <meta-data
             android:name="preloaded_fonts"
-            android:resource="@array/preloaded_fonts" />
+            android:resource="@array/preloaded_fonts"
+            />
     </application>
 
 </manifest>

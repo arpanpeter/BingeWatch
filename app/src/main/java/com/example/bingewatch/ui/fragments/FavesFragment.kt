@@ -23,7 +23,6 @@ class FavesFragment : Fragment() {
 
     private lateinit var recyclerView: RecyclerView
     private lateinit var favouriteAdapter: FavouriteAdapter
-    private lateinit var toolbar: Toolbar
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -115,6 +114,7 @@ class FavesFragment : Fragment() {
         val itemTouchHelper = ItemTouchHelper(itemTouchHelperCallback)
         itemTouchHelper.attachToRecyclerView(recyclerView)
     }
+
 
 
 }

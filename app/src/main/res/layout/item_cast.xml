@@ -26,7 +26,7 @@
         android:layout_height="wrap_content"
         android:text="@string/cast_name"
         android:gravity="center"
-        android:textSize="18sp"
+        android:textSize="15sp"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="@id/image_cast"
         app:layout_constraintEnd_toEndOf="@id/image_cast"

@@ -26,4 +26,5 @@ class CastAdapter(private var castList: List<Cast>) : RecyclerView.Adapter<CastV
         castList = newCastList
         notifyDataSetChanged()
     }
+
 }

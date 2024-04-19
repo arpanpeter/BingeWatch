@@ -11,7 +11,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.appcompat.widget.SearchView
 import com.example.bingewatch.R
-import com.example.bingewatch.ViewModel.SearchViewModel
+import com.example.bingewatch.viewModel.SearchViewModel
 import com.example.bingewatch.adapters.SearchAdapter
 
 class SearchFragment : Fragment() {

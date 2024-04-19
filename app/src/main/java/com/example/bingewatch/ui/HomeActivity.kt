@@ -6,9 +6,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.Navigation
 import androidx.navigation.ui.NavigationUI
 import com.example.bingewatch.R
-import com.example.bingewatch.api.RetrofitInstance
 import com.example.bingewatch.databinding.ActivityHomeBinding
-
 
 class HomeActivity : AppCompatActivity() {
     private lateinit var binding: ActivityHomeBinding
@@ -21,13 +19,19 @@ class HomeActivity : AppCompatActivity() {
         val navController = Navigation.findNavController(this, R.id.moviesNavHostFragment)
         val bottomNavigation = binding.bottomNavigationView
         NavigationUI.setupWithNavController(bottomNavigation, navController)
-       // RetrofitInstance.getPopularMovies()
     }
+
     @SuppressLint("MissingSuperCall")
     override fun onBackPressed() {
-        // Close the app when back button is pressed in HomeActivity
-        //saari parent activities bhi closed
-        finishAffinity()
+        val currentFragmentId =
+            Navigation.findNavController(this, R.id.moviesNavHostFragment).currentDestination?.id
+
+        if (currentFragmentId != R.id.moviesFragment) {
+            Navigation.findNavController(this, R.id.moviesNavHostFragment)
+                .navigate(R.id.moviesFragment)
+        } else {
+            finishAffinity()
+        }
     }
 
 }
