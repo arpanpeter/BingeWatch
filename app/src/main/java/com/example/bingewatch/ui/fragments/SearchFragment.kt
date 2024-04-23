@@ -19,7 +19,6 @@ class SearchFragment : Fragment() {
     private lateinit var searchAdapter: SearchAdapter
     private lateinit var recyclerView: RecyclerView
     private lateinit var searchViewModel: SearchViewModel
-    private lateinit var logoImageView: ImageView
 
 
 
@@ -27,12 +26,10 @@ class SearchFragment : Fragment() {
         val view = inflater.inflate(R.layout.fragment_search, container, false)
 
         recyclerView = view.findViewById(R.id.recyclerSearch)
-        logoImageView = view.findViewById(R.id.logo)
         recyclerView.layoutManager = LinearLayoutManager(requireContext())
         searchAdapter = SearchAdapter(emptyList(),requireContext())
         recyclerView.adapter = searchAdapter
 
-        // Initialize SearchViewModel
         searchViewModel = ViewModelProvider(this)[SearchViewModel::class.java]
 
         setupSearchView(view)
@@ -43,21 +40,24 @@ class SearchFragment : Fragment() {
     private fun setupSearchView(view: View) {
         val searchView = view.findViewById<SearchView>(R.id.searchView)
 
-        searchView.setOnClickListener {
-            searchView.isIconified = false
-            searchView.requestFocus()
+        searchView.isIconified = false
+        searchView.clearFocus()
+
+        searchView.setOnQueryTextFocusChangeListener { _, hasFocus ->
+            if (hasFocus) {
+                searchView.requestFocus()
+            }
         }
+
         searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(query: String?): Boolean {
                 return true
             }
 
             override fun onQueryTextChange(newText: String?): Boolean {
-
                 newText?.let { query ->
                     if (query.length >= 3) {
                         searchViewModel.searchMovies(query)
-
                     } else {
                         searchAdapter.updateData(emptyList())
                     }
@@ -67,8 +67,26 @@ class SearchFragment : Fragment() {
         })
 
         searchViewModel.searchResults.observe(viewLifecycleOwner) { movies ->
-            // Update RecyclerView adapter with search results
             searchAdapter.updateData(movies)
         }
+
+        searchView.setOnCloseListener {
+            searchView.setQuery("", false)
+            searchAdapter.updateData(emptyList())
+            true
+        }
     }
+    override fun onResume() {
+        super.onResume()
+        clearSearchHistory()
+    }
+
+    private fun clearSearchHistory() {
+        val searchView = view?.findViewById<SearchView>(R.id.searchView)
+        searchView?.setQuery("", false)
+        searchAdapter.updateData(emptyList())
+    }
+
+
+
 }

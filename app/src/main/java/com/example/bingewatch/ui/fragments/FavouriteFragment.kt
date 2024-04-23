@@ -5,7 +5,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toolbar
+import android.widget.TextView
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.ItemTouchHelper
@@ -19,17 +19,19 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
-class FavesFragment : Fragment() {
+class FavouriteFragment : Fragment() {
 
     private lateinit var recyclerView: RecyclerView
     private lateinit var favouriteAdapter: FavouriteAdapter
+    private lateinit var message: TextView
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        val view = inflater.inflate(R.layout.fragment_favs, container, false)
-
+        val view = inflater.inflate(R.layout.fragment_favourite, container, false)
+        message = view.findViewById(R.id.nothing_wishlisted)
         recyclerView = view.findViewById(R.id.recyclerFavourites)
         recyclerView.layoutManager = LinearLayoutManager(requireContext())
         favouriteAdapter = FavouriteAdapter(requireContext())
@@ -52,9 +54,14 @@ class FavesFragment : Fragment() {
                 movieDao.getAllMovies()
             }
             favouriteAdapter.setData(allMovies)
+            toggleEmptyViewVisibility(allMovies.isEmpty())
+
         }
     }
 
+    private fun toggleEmptyViewVisibility(isEmpty: Boolean) {
+        message.visibility = if (isEmpty) View.VISIBLE else View.GONE
+    }
 
     private fun attachSwipeToDelete() {
         val itemTouchHelperCallback = object : ItemTouchHelper.SimpleCallback(
@@ -79,6 +86,7 @@ class FavesFragment : Fragment() {
                             val movieDao = MovieDatabase.getDatabase(context).movieDao()
                             movieDao.deleteMovieById(deletedMovie.id)
                         }
+                        fetchMovies()
                     }
 
                     val snackbar = Snackbar.make(
@@ -87,13 +95,11 @@ class FavesFragment : Fragment() {
                         Snackbar.LENGTH_LONG
                     )
                     snackbar.setAction("Undo") {
-                        // Undo the deletion by inserting the movie back into the database
                         lifecycleScope.launch {
                             withContext(Dispatchers.IO) {
                                 val movieDao = MovieDatabase.getDatabase(context).movieDao()
                                 movieDao.insertMovie(deletedMovie)
                             }
-                            // Fetch the updated list of movies after undo and update the adapter
                             fetchMovies()
                         }
                     }
@@ -105,7 +111,6 @@ class FavesFragment : Fragment() {
                     )
                     snackbar.show()
                 } catch (e: IllegalStateException) {
-                    // I am returning from the function in this case
                     return
                 }
             }
@@ -115,6 +120,10 @@ class FavesFragment : Fragment() {
         itemTouchHelper.attachToRecyclerView(recyclerView)
     }
 
+    override fun onResume() {
+        super.onResume()
+        fetchMovies()
+    }
 
 
 }

@@ -1,7 +1,6 @@
 package com.example.bingewatch.ui
 
 import android.annotation.SuppressLint
-import android.content.Intent
 import android.content.res.ColorStateList
 import android.os.Bundle
 import android.util.Log
@@ -20,11 +19,13 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.bitmap.CenterCrop
 import com.example.bingewatch.R
-import com.example.bingewatch.viewModel.MovieCreditsViewModel
 import com.example.bingewatch.adapters.CastAdapter
 import com.example.bingewatch.db.MovieDatabase
 import com.example.bingewatch.models.Movie
 import com.example.bingewatch.util.Constants
+import com.example.bingewatch.viewModel.MovieCreditsViewModel
+import com.google.android.material.appbar.AppBarLayout
+import com.google.android.material.appbar.CollapsingToolbarLayout
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -44,21 +45,25 @@ class DetailsActivity : AppCompatActivity() {
     private lateinit var castAdapter: CastAdapter
     private lateinit var movieCreditsViewModel: MovieCreditsViewModel
     private var isMovieSaved: Boolean = false
+    private lateinit var seeMoreText: TextView
+    private lateinit var appBarLayout: AppBarLayout
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.details_collapse)
+        setContentView(R.layout.details_page)
         setSupportActionBar(findViewById(R.id.toolbar))
         val backButton: ImageButton = findViewById(R.id.back_press_button)
         backButton.setOnClickListener {
-//            val intent=Intent(this,HomeActivity::class.java)
-//            startActivity(intent)
             onBackPressed()
         }
         val movieTitle = intent.extras?.getString("MOVIE_TITLE")
         supportActionBar?.title = movieTitle
 
+        val collapsingBar = findViewById<CollapsingToolbarLayout>(R.id.collapsing_toolbar)
+        collapsingBar.setCollapsedTitleTextColor(ContextCompat.getColor(this, R.color.white))
+        appBarLayout = findViewById(R.id.appBarLayout)
+        appBarLayout.setExpanded(true, true)
         movieDatabase = MovieDatabase.getDatabase(this)
-
         backdrop = findViewById(R.id.movie_backdrop)
         poster = findViewById(R.id.movie_poster)
         titleTextView = findViewById(R.id.movie_title)
@@ -68,8 +73,11 @@ class DetailsActivity : AppCompatActivity() {
         saveFab = findViewById(R.id.fab_save_movie)
         castRecyclerView = findViewById(R.id.castRecyclerView)
         val castHeaderTextView = findViewById<Button>(R.id.text_cast_header)
+        seeMoreText = findViewById(R.id.see_more_text)
+        castHeaderTextView.text = "SHOW CAST"
         castHeaderTextView.setOnClickListener {
             toggleCastListVisibility()
+            toggleCastButtonText(castHeaderTextView)
         }
 
         val extras = intent.extras
@@ -84,31 +92,44 @@ class DetailsActivity : AppCompatActivity() {
             movieCreditsViewModel = ViewModelProvider(this)[MovieCreditsViewModel::class.java]
 
             val movieId = extras.getLong("MOVIE_ID")
-            fetchAndDisplayCast(movieId)
             isMovieSavedInDatabase(movieId)
-
-            // Restore isMovieSaved state from savedInstanceState
+            fetchAndDisplayCast(movieId)
             isMovieSaved = savedInstanceState?.getBoolean("IS_MOVIE_SAVED") ?: false
             updateFabColor(isMovieSaved)
-
         } else {
             finish()
         }
 
+        seeMoreText.setOnClickListener {
+            overviewTextView.maxLines = Integer.MAX_VALUE
+            seeMoreText.visibility =
+                View.GONE
+        }
         saveFab.setOnClickListener {
             if (isMovieSaved) {
                 deleteMovieFromDatabase(extras)
+                updateFabColor(false)
             } else {
                 saveMovieToDatabase(extras)
+                updateFabColor(true)
             }
         }
     }
 
     override fun onSaveInstanceState(outState: Bundle) {
-        // Save the state of isMovieSaved
         outState.putBoolean("IS_MOVIE_SAVED", isMovieSaved)
         super.onSaveInstanceState(outState)
     }
+
+    private fun toggleCastButtonText(castButton: Button) {
+
+        if (castButton.getText().toString() == "SHOW CAST") {
+            castButton.text = "HIDE CAST"
+        } else {
+            castButton.text = "SHOW CAST"
+        }
+    }
+
 
     private fun toggleCastListVisibility() {
         val recyclerView = findViewById<RecyclerView>(R.id.castRecyclerView)
@@ -126,11 +147,13 @@ class DetailsActivity : AppCompatActivity() {
         Glide.with(this)
             .load(Constants.IMAGE_BASE_URL + extras.getString("MOVIE_BACKDROP"))
             .transform(CenterCrop())
+            .placeholder(R.drawable.movie_icon)
             .into(backdrop)
 
         Glide.with(this)
             .load(Constants.IMAGE_BASE_URL + extras.getString("MOVIE_POSTER"))
             .transform(CenterCrop())
+            .placeholder(R.drawable.movie_icon)
             .into(poster)
 
         titleTextView.text = extras.getString("MOVIE_TITLE", "")
@@ -146,15 +169,17 @@ class DetailsActivity : AppCompatActivity() {
         }
     }
 
-    private fun isMovieSavedInDatabase(movieId: Long): Boolean {
-        var isSaved = false
+
+    private fun isMovieSavedInDatabase(movieId: Long) {
         CoroutineScope(Dispatchers.IO).launch {
             val movie = movieDatabase.movieDao().getMovieById(movieId)
-            isSaved = movie != null
-            updateFabColor(isSaved)
+            isMovieSaved = movie != null
+            runOnUiThread {
+                updateFabColor(isMovieSaved)
+            }
         }
-        return isSaved
     }
+
 
     private fun saveMovieToDatabase(extras: Bundle?) {
         extras?.let {
@@ -183,7 +208,7 @@ class DetailsActivity : AppCompatActivity() {
             val movieId = extras.getLong("MOVIE_ID", -1)
             if (movieId != -1L) {
                 CoroutineScope(Dispatchers.IO).launch {
-                    // Delete movie from the database
+                    //deleting the movie from the database
                     movieDatabase.movieDao().deleteMovieById(movieId)
                 }
                 isMovieSaved = false

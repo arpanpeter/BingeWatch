@@ -2,10 +2,10 @@
     <!-- Base application theme. -->
     <style name="Base.Theme.BingeWatch" parent="Theme.Material3.DayNight.NoActionBar">
         <!-- Customize your light theme here. -->
-         <item name="colorPrimary">@color/purple</item>
-         <item name="colorPrimaryVariant">@color/purple</item>
-         <item name="android:statusBarColor">@color/purple</item>
-<!--        <item name="android:textColorPrimary">@color/white</item>-->
+        <item name="colorPrimary">@color/purple</item>
+        <item name="colorPrimaryVariant">@color/purple</item>
+        <item name="android:statusBarColor">@color/purple</item>
+<!--        <item name="android:textColorPrimary">@color/white</item> &lt;!&ndash; Set text color to white &ndash;&gt;-->
 
     </style>
 
@@ -18,6 +18,10 @@
         <item name="android:windowBackground">@color/white</item>
         <item name="android:windowNoTitle">true</item>
         <item name="android:windowFullscreen">true</item>
+    </style>
+    <style name="RoundedCornerImageView">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">8dp</item>
     </style>
 
 </resources>

@@ -13,7 +13,7 @@
         android:fontFamily="@font/poppins"
         android:text="@string/your_profile"
         android:textColor="@color/purple"
-        android:textSize="30sp"
+        android:textSize="20sp"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"

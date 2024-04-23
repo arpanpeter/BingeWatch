@@ -22,7 +22,7 @@ class DualViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
     fun bind(movie1: Movie, movie2: Movie?) {
         movieTitle1.text = movie1.title
-        rating1.text = "Rating: ${"%.1f".format(movie1.rating)}"
+        rating1.text = "Rating: ${"%.1f".format(movie1.rating / 2)}"
         Glide.with(itemView.context)
             .load(Constants.IMAGE_BASE_URL + movie1.posterPath)
             .placeholder(R.drawable.movie_icon)
@@ -30,7 +30,7 @@ class DualViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
         if (movie2 != null) {
             movieTitle2.text = movie2.title
-            rating2.text = "Rating: ${"%.1f".format(movie2.rating)}"
+            rating2.text = "Rating: ${"%.1f".format(movie2.rating / 2)}"
             Glide.with(itemView.context)
                 .load(Constants.IMAGE_BASE_URL + movie2.posterPath)
                 .placeholder(R.drawable.movie_icon)

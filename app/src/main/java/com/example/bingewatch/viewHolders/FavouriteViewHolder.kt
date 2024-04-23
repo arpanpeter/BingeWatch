@@ -14,12 +14,12 @@ class FavouriteViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
     private val movieTitle: TextView = itemView.findViewById(R.id.movieTitle)
     private val movieDescription: TextView = itemView.findViewById(R.id.movieDescription)
     private val movieImage: ImageView = itemView.findViewById(R.id.movieImage)
-    private val rating: TextView = itemView.findViewById(R.id.Rating)
+    private val rating: TextView = itemView.findViewById(R.id.rating)
 
     fun bind(movie: Movie) {
         movieTitle.text = movie.title
         movieDescription.text = movie.overview
-        rating.text = "Rating: ${"%.1f".format(movie.rating)}"
+        rating.text = "Rating: ${"%.1f".format(movie.rating / 2)}"
         Glide.with(itemView.context)
             .load(Constants.IMAGE_BASE_URL + movie.posterPath)
             .placeholder(R.drawable.movie_icon)

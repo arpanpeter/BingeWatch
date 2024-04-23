@@ -15,7 +15,7 @@ class MovieCreditsViewModel : ViewModel() {
     fun fetchMovieCredits(movieId: Long) {
         repository.getMovieCredits(movieId, onSuccess = { castList ->
             _castList.value = castList
-        }, onFailure = { errorMessage ->
+        }, onFailure = { errorMessage -> "Failure"
         })
     }
 }

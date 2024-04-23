@@ -1,6 +1,6 @@
 package com.example.bingewatch.api
 
-import com.example.bingewatch.models.GetMoviesResponse
+import com.example.bingewatch.models.MoviesResponse
 import com.example.bingewatch.models.MovieCreditsResponse
 import com.example.bingewatch.models.SearchResponse
 import com.example.bingewatch.util.Constants
@@ -15,7 +15,7 @@ interface MovieApi {
     fun getPopularMovies(
         @Query("api_key") apiKey: String = Constants.API_KEY,
         @Query("page") page: Int
-    ): Call<GetMoviesResponse>
+    ): Call<MoviesResponse>
     @GET("search/movie")
     suspend fun searchMovies(
         @Query("query") query: String,

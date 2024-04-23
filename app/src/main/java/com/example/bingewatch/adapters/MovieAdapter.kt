@@ -8,7 +8,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.bingewatch.R
 import com.example.bingewatch.models.Movie
 import com.example.bingewatch.ui.DetailsActivity
-import com.example.bingewatch.viewHolders.DualViewHolder
+import com.example.bingewatch.viewHolders.EvenViewHolder
 import com.example.bingewatch.viewHolders.SingleViewHolder
 
 class MovieAdapter(private var movies: List<Movie>) :
@@ -18,26 +18,25 @@ class MovieAdapter(private var movies: List<Movie>) :
 
     companion object {
         private const val VIEW_TYPE_SINGLE = 0
-        private const val VIEW_TYPE_DUAL = 1
+        private const val VIEW_TYPE_EVEN = 1
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         context = parent.context
         return when (viewType) {
             VIEW_TYPE_SINGLE -> {
-                val view = LayoutInflater.from(context).inflate(R.layout.item_movies, parent, false)
+                val view = LayoutInflater.from(context).inflate(R.layout.odd_movies, parent, false)
                 SingleViewHolder(view)
             }
-            VIEW_TYPE_DUAL -> {
-                val view = LayoutInflater.from(context).inflate(R.layout.item_movie_dual_row, parent, false)
-                DualViewHolder(view)
+            VIEW_TYPE_EVEN -> {
+                val view = LayoutInflater.from(context).inflate(R.layout.even_layout, parent, false)
+                EvenViewHolder(view)
             }
             else -> throw IllegalArgumentException("Invalid view type")
         }
     }
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
-
         when (holder) {
             is SingleViewHolder -> {
                 holder.bind(movies[position])
@@ -45,16 +44,10 @@ class MovieAdapter(private var movies: List<Movie>) :
                     navigateToDetails(movies[position])
                 }
             }
-            is DualViewHolder -> {
-                val index = position * 2
-                holder.bind(movies.getOrNull(index) ?: return, movies.getOrNull(index + 1))
-                holder.itemView1.setOnClickListener {
-                    navigateToDetails(movies[index])
-                }
-                holder.itemView2.setOnClickListener {
-                    movies.getOrNull(index + 1)?.let { movie ->
-                        navigateToDetails(movie)
-                    }
+            is EvenViewHolder -> {
+                holder.bind(movies[position])
+                holder.itemView.setOnClickListener {
+                    navigateToDetails(movies[position])
                 }
             }
         }
@@ -65,11 +58,7 @@ class MovieAdapter(private var movies: List<Movie>) :
     }
 
     override fun getItemViewType(position: Int): Int {
-        return if (position % 2 == 0) {
-            VIEW_TYPE_SINGLE
-        } else {
-            VIEW_TYPE_DUAL
-        }
+        return if (position % 2 == 0) VIEW_TYPE_SINGLE else VIEW_TYPE_EVEN
     }
 
     private fun navigateToDetails(movie: Movie) {
@@ -89,3 +78,4 @@ class MovieAdapter(private var movies: List<Movie>) :
         notifyDataSetChanged()
     }
 }
+

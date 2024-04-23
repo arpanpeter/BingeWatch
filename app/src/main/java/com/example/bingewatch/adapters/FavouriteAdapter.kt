@@ -20,13 +20,14 @@ class FavouriteAdapter(private val context: Context) : RecyclerView.Adapter<Favo
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): FavouriteViewHolder {
-        val view = LayoutInflater.from(parent.context).inflate(R.layout.common_layout, parent, false)
+        val view = LayoutInflater.from(parent.context).inflate(R.layout.odd_movies, parent, false)
         return FavouriteViewHolder(view)
     }
 
     override fun onBindViewHolder(holder: FavouriteViewHolder, position: Int) {
         val movie = movies[position]
         holder.bind(movie)
+        //make a method for it
         holder.itemView.setOnClickListener {
             val intent = Intent(context, DetailsActivity::class.java)
             intent.putExtra("MOVIE_ID", movie.id)

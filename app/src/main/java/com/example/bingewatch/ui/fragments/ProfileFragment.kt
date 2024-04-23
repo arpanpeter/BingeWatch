@@ -16,7 +16,6 @@ import com.google.firebase.firestore.core.View
 
 class ProfileFragment : Fragment() {
 
-    //private lateinit var textViewUsername: TextView
     private lateinit var buttonSignOut: Button
     private lateinit var auth: FirebaseAuth
 
@@ -29,7 +28,6 @@ class ProfileFragment : Fragment() {
 
 
         buttonSignOut.setOnClickListener {
-            // Sign out the user
             auth.signOut()
 
             val intent = Intent(context, LoginActivity::class.java)

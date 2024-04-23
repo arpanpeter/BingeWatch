@@ -10,7 +10,7 @@
         android:title="@string/wishlist" />
     <item
         android:id="@+id/searchFragment"
-        android:icon="@drawable/search_icon"
+        android:icon="@drawable/search"
         android:title="@string/search" />
     <item
         android:id="@+id/profileFragment"

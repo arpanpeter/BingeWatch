@@ -13,7 +13,7 @@ import com.example.bingewatch.viewHolders.SearchViewHolder
 class SearchAdapter(private var movies: List<Movie>, private val context: Context) : RecyclerView.Adapter<SearchViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SearchViewHolder {
-        val view = LayoutInflater.from(parent.context).inflate(R.layout.common_layout, parent, false)
+        val view = LayoutInflater.from(parent.context).inflate(R.layout.odd_movies, parent, false)
         return SearchViewHolder(view)
     }
 
@@ -23,6 +23,7 @@ class SearchAdapter(private var movies: List<Movie>, private val context: Contex
         holder.itemView.setOnClickListener {
             val intent = Intent(context, DetailsActivity::class.java)
             intent.putExtra("MOVIE_ID", movie.id)
+
             intent.putExtra("MOVIE_TITLE", movie.title)
             intent.putExtra("MOVIE_RATING", movie.rating)
             intent.putExtra("MOVIE_DESC", movie.overview)

@@ -15,7 +15,6 @@ class HomeActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityHomeBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        //Connecting Fragments with the Bottom NavBar
         val navController = Navigation.findNavController(this, R.id.moviesNavHostFragment)
         val bottomNavigation = binding.bottomNavigationView
         NavigationUI.setupWithNavController(bottomNavigation, navController)

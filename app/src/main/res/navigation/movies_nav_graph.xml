@@ -6,7 +6,7 @@
 
     <fragment
         android:id="@+id/favesFragment"
-        android:name="com.example.bingewatch.ui.fragments.FavesFragment"
+        android:name="com.example.bingewatch.ui.fragments.FavouriteFragment"
         android:label="FavesFragment" />
 
     <fragment
